@@ -678,6 +678,16 @@ The [Python planner](docs/python-planner.md) document gives the grammar, CLI opt
 
 No procedure in this documentation changes the NorthSea data or metadata.
 
+## References
+
+- [Jev and DuckDB: Plain-English Conditions in SQL](https://duckdb.org/2026/09/29/jev), DuckDB, 2026-09-29.
+  It introduces the `jev`, `jev_prob`, `jev_choice`, and `jev_score` functions.
+  Those functions send row data to the hosted TypeSafe API.
+  This project keeps the function names and runs the local Laya model.
+- [10 Best Jev Alternatives: Open-Weight Decision Models (2026)](https://www.respan.ai/articles/jev-alternatives), Respan, 2026-10-16.
+  It compares open-weight alternatives to Jev, including Laya and Tev1.
+  It lists Laya as free to self-host on CPU or GPU.
+
 ## Acknowledgments
 
 Thank you to [Geodata](https://www.geodata.no/) for the NorthSea sample data.
