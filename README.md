@@ -691,3 +691,9 @@ No procedure in this documentation changes the NorthSea data or metadata.
 ## Acknowledgments
 
 Thank you to [Geodata](https://www.geodata.no/) for the NorthSea sample data.
+
+## License
+
+The project source is licensed under the [Apache License 2.0](LICENSE).
+The license does not cover the NorthSea sample data in `data/NorthSea.tar.gz`.
+The terms of its source apply to that data.
