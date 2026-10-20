@@ -324,6 +324,11 @@ They do not change the database or the NorthSea metadata.
 | 2026-10-20 | Cache optimization | 105 | 4 | Benchmark below; answers unchanged | [optimization-validation.json](../artifacts/optimization-validation.json) |
 | 2026-10-20 | Mixed spatial and semantic examples | Not recorded | Not recorded | 4 examples; tev1 256 valid, 250 correct | [spatial-jev-examples.json](../artifacts/spatial-jev-examples.json), [tev1](../artifacts/tev1-spatial-jev/report.json) |
 | 2026-10-20 | Removal of the reference-plan validation tool | 93 | 4 | All results unchanged | [cleanup-validation.json](../artifacts/cleanup-validation.json) |
+| 2026-10-20 | Documentation consolidation | Not run | Not run | 10 files merged into 5; no broken links | [readme-consolidation-validation.json](../artifacts/readme-consolidation-validation.json) |
+| 2026-10-20 | Local sample dataset archive | Not run | Not run | Archive files equal to the source; examples unchanged | [local-data-validation.json](../artifacts/local-data-validation.json) |
+
+Older records can name artifacts that were later pruned.
+Commit `fafa195` contains those files.
 
 The first Python validation had 54 tests. The later tool removal deleted 12 of them.
 The other 42 tests cover these items:
@@ -356,7 +361,6 @@ Its weights SHA-256 is `891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7
 The status probe made nine model evaluations. `jev` used the `jev_prob` answers again.
 The probe took approximately 0.506 seconds after the model load.
 The semantic filter sent seven distinct status states to the model in one batch.
-A [repeat with an earlier lockfile](../artifacts/tev1-local-locked/report.json) gave the same tev1 counts.
 
 ### Native extension
 
@@ -376,21 +380,12 @@ All eight exact example counts were unchanged.
 During the review, `scripts/evaluate_tev1.py` stopped before evaluation.
 NorthSea no longer had the `okf/` documents.
 The new `knowledge/datasets/Wells.md` did not have the depth-alias text that the old loader needed.
-Thus the review used the compiled SQL from `artifacts/northsea-native-smoke.json`.
+Thus the review replayed the compiled SQL from the native smoke test.
 This replay tested the native SQL and the model. It did not test the planner.
 The metadata update later fixed the loader.
 
 The review tests cover repeated rows across chunks, shared connections, model reloads, failed loads, delimiters in options, row contents, malformed distributions, NULL inputs, and truncation.
 Two failed truncation attempts make two model evaluations, two errors, and no cache entry.
-
-Caution: The output directory must not exist.
-
-1. Run the historical replay.
-
-   ```sh
-   .venv/bin/python artifacts/tev1-upstream-review/replay.py \
-     artifacts/tev1-upstream-review-repeat
-   ```
 
 ### Knowledge metadata layout
 

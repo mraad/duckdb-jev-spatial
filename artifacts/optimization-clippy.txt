@@ -1,2 +1,0 @@
-    Checking jev_spatial v0.1.0 (~/GWorkspace/duckdb-jev-spatial/native)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.39s

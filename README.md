@@ -1,4 +1,4 @@
-# DuckDB Jev Spatial
+# DuckDB Jev (Laya) Spatial
 
 This project runs spatial SQL and local Laya answers inside DuckDB.
 The native extension adds seven Jev functions to DuckDB.
