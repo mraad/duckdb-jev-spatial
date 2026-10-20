@@ -1,0 +1,242 @@
+{
+  "checked_at": "2026-10-20T07:35:54.518181+00:00",
+  "upstream": "~/GWorkspace/recodelabs/duckdb-jev",
+  "upstream_commit": "378d36ffba2b7dd8cc3e1a20a673768748892bbe",
+  "upstream_review": "Local source review; no upstream build or hosted review",
+  "upstream_source_sha256": {
+    "src/jev_extension.cpp": "ba6f4b70fe2c431067a0b61bd55d501fc5c9c10a3e409ed45f1d0cef8a04b6b4",
+    "src/jev_client.cpp": "5b562d761b458b99132f59466e55064eee50fea556ffe9dcdbfc67139ca916a8",
+    "src/include/jev_state.hpp": "5fa5247a2b3dc1f043112ae7247b0d4fba863e6870840e57378519b0cd465485"
+  },
+  "extension_sha256": "21ea1dcec279c588447f7718a0926da1f9bee2b9f598cbceedcc0a0d1aa1acfa",
+  "source_sha256": {
+    "native/src/lib.rs": "4913e704a1595b59ad9e486832a47811788c046b599e5a618898c7769810e2bc",
+    "native/Cargo.toml": "31b946c79404b1bc7949f3823b4744b45df42c6f5d5458874e81d2f69177b14f",
+    "native/Cargo.lock": "21066cb9bfd4f2318591a0c60a3dd5448174063b4409b9ad9bd7428b29e873c5",
+    "tests/test_native.py": "565eddf88426893b4ff95f9d487a511d520b25894a3ccbe8bdaac1a11ec7e8a0",
+    "../laya/laya-rust/src/laya_engine.rs": "dfdb89cf2225dbe7e7994db34c33e879d0fd0a02439c1874042749e3770e2a90"
+  },
+  "model_sha256": {
+    "model.onnx": "e0fed2535d7a126a57cffa65d3580452c1eb13dceb9f500bb4549f1e5b839952",
+    "model.onnx.data": "afcc11e72b59193fbec6e5dc8b693c9baa81cf66bec53279cefd687b318c3199"
+  },
+  "duckdb": "1.5.6",
+  "platform": "macOS arm64",
+  "profile": "dev",
+  "unsigned": true,
+  "new_functions": [
+    "jev_eval",
+    "jev_confidence",
+    "jev_score_norm"
+  ],
+  "new_stats": [
+    "errors"
+  ],
+  "pytest_passed": 82,
+  "native_pytest_cases": 28,
+  "rust_unit_tests_passed": 4,
+  "clippy_warnings_denied": true,
+  "readme_sql_blocks": [
+    {
+      "block": 1,
+      "row_count": 0,
+      "columns": [
+        "Success"
+      ]
+    },
+    {
+      "block": 2,
+      "row_count": 1,
+      "columns": [
+        "Count"
+      ]
+    },
+    {
+      "block": 3,
+      "row_count": 106,
+      "columns": [
+        "OBJECTID"
+      ]
+    },
+    {
+      "block": 4,
+      "row_count": 494,
+      "columns": [
+        "OBJECTID"
+      ]
+    },
+    {
+      "block": 5,
+      "row_count": 4426,
+      "columns": [
+        "OBJECTID"
+      ]
+    },
+    {
+      "block": 6,
+      "row_count": 52,
+      "columns": [
+        "OBJECTID"
+      ]
+    },
+    {
+      "block": 7,
+      "row_count": 1375,
+      "columns": [
+        "OBJECTID"
+      ]
+    },
+    {
+      "block": 8,
+      "row_count": 4873,
+      "columns": [
+        "OBJECTID"
+      ]
+    },
+    {
+      "block": 9,
+      "row_count": 72,
+      "columns": [
+        "OBJECTID"
+      ]
+    },
+    {
+      "block": 10,
+      "row_count": 600,
+      "columns": [
+        "well_id",
+        "pipeline_id",
+        "distance_m"
+      ]
+    },
+    {
+      "block": 11,
+      "row_count": 1,
+      "columns": [
+        "jev_laya_load('models/laya-onnx/laya')"
+      ]
+    },
+    {
+      "block": 12,
+      "row_count": 1,
+      "columns": [
+        "Count"
+      ]
+    },
+    {
+      "block": 13,
+      "row_count": 2,
+      "columns": [
+        "OBJECTID",
+        "status",
+        "probability"
+      ]
+    },
+    {
+      "block": 14,
+      "row_count": 7,
+      "columns": [
+        "status",
+        "answer"
+      ]
+    },
+    {
+      "block": 15,
+      "row_count": 3,
+      "columns": [
+        "current_phase",
+        "answer"
+      ]
+    },
+    {
+      "block": 16,
+      "row_count": 3,
+      "columns": [
+        "current_phase",
+        "score",
+        "normalized_score",
+        "confidence"
+      ]
+    }
+  ],
+  "diagnostic_examples": {
+    "ABANDONED IN PLACE": {
+      "type": "choice",
+      "choice": "abandoned",
+      "probabilities": {
+        "in service": 0.0135,
+        "decommissioned": 0.0387,
+        "abandoned": 0.9479
+      },
+      "confidence": 0.7865,
+      "answer_confidence": 0.9479,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "DECOMMISSIONED": {
+      "type": "choice",
+      "choice": "decommissioned",
+      "probabilities": {
+        "in service": 0.0639,
+        "decommissioned": 0.8611,
+        "abandoned": 0.075
+      },
+      "confidence": 0.546,
+      "answer_confidence": 0.8611,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "IN SERVICE": {
+      "type": "choice",
+      "choice": "in service",
+      "probabilities": {
+        "in service": 0.9919,
+        "decommissioned": 0.0045,
+        "abandoned": 0.0036
+      },
+      "confidence": 0.9523,
+      "answer_confidence": 0.9919,
+      "action": {
+        "act_probability": 1.0
+      }
+    }
+  },
+  "spatial_counts": [
+    106,
+    494,
+    4426,
+    52,
+    1375,
+    4873,
+    72,
+    600
+  ],
+  "spatial_counts_match_previous": true,
+  "database_sha256_before": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "database_sha256_after": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "database_unchanged": true,
+  "standalone_shell_output": "artifacts/upstream-review-shell.txt",
+  "tev1_report": "artifacts/tev1-upstream-review/report.json",
+  "tev1_valid": 256,
+  "tev1_correct": 250,
+  "tev1_predictions_and_probabilities_unchanged": true,
+  "english_planner_revalidated": false,
+  "planner_limitation": "Current NorthSea no longer contains okf/Wells.md and okf/Pipelines.md; knowledge/datasets also changes the required depth alias. Replayed previously compiled SQL; no metadata validation bypass in production code.",
+  "limits": [
+    "No calibration claim for NorthSea confidence or action-head probability",
+    "Six known semantic failures retained",
+    "No upstream C++ build, other platform, GPU or throughput tests",
+    "FELN corpus and unchanged Laya library tests not rerun"
+  ],
+  "local_documentation_links_checked": 95,
+  "tev1_replay_reproduction_passed": true,
+  "documentation_sha256": {
+    "README.md": "6ea36ae4b4f6423bd45ab8f4182df31d9fe4b55b00d0f6b41238eecc2d259905",
+    "docs/upstream-review.md": "81c2fb609a596c2a30b656a9683ebb5e8ef1e8e7b31234e3350788ba8338c415",
+    "docs/native-extension.md": "e87247ddf73e98ac9dbc7a947baff40e6fa62e9e65fd9ffa3faecc684787c70e",
+    "docs/overview.html": "6838cc7e664968f7a91748edb87e0a718cd69719c12f6cc824a5897467d33abd"
+  },
+  "replay_script_sha256": "915d255051242bd74930ef42a0235d78bfd276eb6fb011aae0d10aa8b05086fa"
+}

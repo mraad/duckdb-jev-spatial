@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-10-20T09:52:29.001573+00:00",
+  "change": "Consolidated 10 documentation files into README.md and four topic files in ASD STE100 style",
+  "backup_directory": "~/GWorkspace/duckdb-jev-spatial/backups/before-readme-consolidation-20261020T092502Z",
+  "backup_archive_sha256": "3ba01afe32735e8ccfb286552d136d9fa39f68224ee16321047ff059315a0dfb",
+  "backup_file_count": 12,
+  "backup_readback_verified": true,
+  "deleted": [
+    "docs/integration.md",
+    "docs/metadata-layout.md",
+    "docs/native-extension.md",
+    "docs/optimization.md",
+    "docs/overview.html",
+    "docs/python-backend.md",
+    "docs/spatial-jev-examples.md",
+    "docs/upstream-review.md"
+  ],
+  "source_sha256": {
+    "README.md": "f03a5dbe3ed5af18f147d1a8ffef0addccb886d7a665a3ed150dddd5490bfd22",
+    "docs/sql-reference.md": "513f3a4c78a065d16553d286b1f34b7e1bbcb1b94c3879e5c7ccd638e34eaa16",
+    "docs/python-planner.md": "fc837733640b80f4aed4e6f190db68554e97647f336753eb7597f6688fe04db4",
+    "docs/design.md": "bac20e9775511b0d8803ba75bb7b3084fa884ccad85d9e386cd452d5876a9a4c",
+    "docs/validation.md": "25c4eb92b5ce4ed894a37619548d40f2e83563b85e4568924351069ce2bf14ec",
+    "CLAUDE.md": "6f58fbbda0a41a7b9f64d68587b716333ba3d811f5c450dc02d39a8fd99bb214"
+  },
+  "documentation_bytes_before": 112927,
+  "documentation_bytes_after": 75892,
+  "broken_links_or_anchors": 0,
+  "sentences_over_limit": 0,
+  "sentence_limits": {
+    "procedural_step": 20,
+    "descriptive": 25
+  },
+  "old_facts_checked": 357,
+  "old_facts_not_carried": "SVG coordinates and colors from docs/overview.html; three rephrased passages",
+  "new_or_changed_commands_run": [
+    "cargo test",
+    "cargo clippy",
+    "cargo fmt --check",
+    "smoke_northsea.py with --extension (other output path)",
+    "duckdb -json shell run of spatial-jev-examples.sql",
+    "cmp shell output"
+  ],
+  "new_or_changed_commands_not_run": [
+    "smoke_northsea.py with PyTorch checkpoint",
+    "evaluate_tev1.py with PyTorch checkpoint",
+    "tev1-upstream-review/replay.py",
+    "backup inspect procedure",
+    "benchmark_native.py"
+  ],
+  "code_and_data_unchanged": true,
+  "limitations": [
+    "Sentence-length check is automatic; STE approved-vocabulary compliance was reviewed by hand, not by a dictionary check"
+  ]
+}

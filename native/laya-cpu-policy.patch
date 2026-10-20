@@ -1,0 +1,16 @@
+diff --git a/laya-rust/src/laya_engine.rs b/laya-rust/src/laya_engine.rs
+index 3d2c3743..dcdf4f4a 100644
+--- a/laya-rust/src/laya_engine.rs
++++ b/laya-rust/src/laya_engine.rs
+@@ -627,7 +627,10 @@ fn apply_execution_provider(
+     provider: LayaExecutionProvider,
+ ) -> Result<SessionBuilder> {
+     match provider {
+-        LayaExecutionProvider::Cpu => Ok(builder),
++        // ort defaults to MaxEfficiency (NPU); explicitly honor the CPU option.
++        LayaExecutionProvider::Cpu => builder
++            .with_auto_device(ort::session::builder::AutoDevicePolicy::PreferCPU)
++            .map_err(onnx_err),
+ 
+         LayaExecutionProvider::Cuda => {
+             #[cfg(feature = "cuda")]

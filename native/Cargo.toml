@@ -1,0 +1,18 @@
+[package]
+name = "jev_spatial"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+duckdb = { version = "=1.10506.1", features = ["loadable-extension", "vscalar"] }
+laya = { package = "laya-onnx", path = "../../laya/laya-rust", default-features = false }
+# Load an explicitly installed runtime. No runtime binaries are downloaded during the build.
+ort = { version = "=2.0.0-rc.13", features = ["load-dynamic"] }
+serde_json = "1"
+
+[profile.release]
+lto = "thin"

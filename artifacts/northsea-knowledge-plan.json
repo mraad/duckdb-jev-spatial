@@ -1,0 +1,47 @@
+{
+  "plan": {
+    "entity": "Wells",
+    "filters": [
+      {
+        "field": "water_depth",
+        "op": ">",
+        "value": 350.0
+      }
+    ],
+    "relation": {
+      "target": "Pipelines",
+      "predicate": "within_distance",
+      "filters": [
+        {
+          "field": "current_phase",
+          "op": "=",
+          "value": "IN SERVICE"
+        }
+      ],
+      "distance_m": 5000.0,
+      "negate": false
+    },
+    "semantic": null,
+    "semantic_fields": []
+  },
+  "where": "w.\"water_depth\" > CAST(? AS DOUBLE PRECISION) AND w.\"geometry\" IS NOT NULL AND NOT ST_IsEmpty(w.\"geometry\") AND EXISTS (SELECT 1 FROM main.\"Pipelines\" p WHERE p.\"current_phase\" = ? AND p.\"geometry\" IS NOT NULL AND NOT ST_IsEmpty(p.\"geometry\") AND ST_DWithin(ST_Transform(w.\"geometry\", 'EPSG:4326', 'EPSG:3035', always_xy := TRUE), ST_Transform(p.\"geometry\", 'EPSG:4326', 'EPSG:3035', always_xy := TRUE), CAST(? AS DOUBLE PRECISION)))",
+  "sql": "SELECT w.* FROM main.\"Wells\" w WHERE w.\"water_depth\" > CAST(? AS DOUBLE PRECISION) AND w.\"geometry\" IS NOT NULL AND NOT ST_IsEmpty(w.\"geometry\") AND EXISTS (SELECT 1 FROM main.\"Pipelines\" p WHERE p.\"current_phase\" = ? AND p.\"geometry\" IS NOT NULL AND NOT ST_IsEmpty(p.\"geometry\") AND ST_DWithin(ST_Transform(w.\"geometry\", 'EPSG:4326', 'EPSG:3035', always_xy := TRUE), ST_Transform(p.\"geometry\", 'EPSG:4326', 'EPSG:3035', always_xy := TRUE), CAST(? AS DOUBLE PRECISION)))",
+  "parameters": [
+    350.0,
+    "IN SERVICE",
+    5000.0
+  ],
+  "interpretation": [
+    "metadata → knowledge/datasets; source files are hashed",
+    "depth → Wells.water_depth: Water depth at the well location, in meters.",
+    "in-service → Pipelines.current_phase = 'IN SERVICE' (any pipeline type)",
+    "distance → EPSG:3035 planar meters, longitude/latitude axis order",
+    "within distance is inclusive; relation uses EXISTS, returning each well once"
+  ],
+  "sources": {
+    "~/Documents/ArcGIS/Projects/NorthSea/NorthSea.ossie.yaml": "2b5736ce4ffe6689f5275a976432c0fa634e97eb123ac4ed95f07cd684ccba13",
+    "~/Documents/ArcGIS/Projects/NorthSea/NorthSea.ontology.yaml": "bd000142abb39503d875dd0f684df2a805926cc9cf9f86e84270f9011c62dcb2",
+    "~/Documents/ArcGIS/Projects/NorthSea/knowledge/datasets/Wells.md": "b415e7943dde2070ca27db1002187ed4dec0a18070f382cd4d791ce0bbfafef4",
+    "~/Documents/ArcGIS/Projects/NorthSea/knowledge/datasets/Pipelines.md": "e68f8dfae81e84a42eaed8d681484fe6a380bba68c03cdf1bf4c2cf0f9c4fbad"
+  }
+}

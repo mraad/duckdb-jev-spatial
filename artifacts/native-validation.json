@@ -1,0 +1,50 @@
+{
+  "platform": "macOS-26.7.1-arm64-arm-64bit",
+  "duckdb": "1.5.6",
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "onnxruntime": "1.31.0",
+  "extension": "~/GWorkspace/duckdb-jev-spatial/native/dist/jev_spatial.duckdb_extension",
+  "extension_sha256": "6e172ff2509f0c0ef2a6259437d6dca7ae4e1750a7337d060afd01bc05ad89b8",
+  "source_sha256": {
+    "native/src/lib.rs": "98f9cad9e46bf523a40163a19e63b2afea87af95d5bcabb4e23970940f84990d",
+    "native/Cargo.lock": "21066cb9bfd4f2318591a0c60a3dd5448174063b4409b9ad9bd7428b29e873c5",
+    "../laya/laya-rust/src/laya_engine.rs": "dfdb89cf2225dbe7e7994db34c33e879d0fd0a02439c1874042749e3770e2a90"
+  },
+  "model_sha256": {
+    "model.onnx": "e0fed2535d7a126a57cffa65d3580452c1eb13dceb9f500bb4549f1e5b839952",
+    "model.onnx.data": "afcc11e72b59193fbec6e5dc8b693c9baa81cf66bec53279cefd687b318c3199",
+    "rl_agent_config.json": "ae287b56bbcf5f8c4f4541ae9dfd00c914c4c48b940b8398c3058af37ba92bbd",
+    "tokenizer/tokenizer.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+  },
+  "source_weights_sha256": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c",
+  "standalone_duckdb_shell": true,
+  "python_runtime_required_by_extension": false,
+  "source_database_read_only": true,
+  "database_unchanged": true,
+  "exact_ids_match_python_and_distance_baseline": true,
+  "exact_count": 106,
+  "all_four_status_probe_outputs_equal_python": true,
+  "tev1_all_256_predictions_and_probabilities_equal_python": true,
+  "pytest": {
+    "passed": 68
+  },
+  "extension_rust_unit_tests": {
+    "passed": 2
+  },
+  "laya_rust_library_tests": {
+    "passed": 17
+  },
+  "clippy_warnings_denied": true,
+  "laya_required_python_checks_passed": true,
+  "onnx_export_verification": {
+    "fixture_comparisons": 2,
+    "shape_session_checks": 36,
+    "shape_sweep_compares_pytorch": false
+  },
+  "limits": [
+    "Unsigned development binary for macOS arm64 and DuckDB 1.5.6",
+    "One ONNX forward pass per distinct row; no multi-state batching",
+    "Six semantic failures retained; English parser coverage unchanged",
+    "Other platforms and GPU providers were not tested"
+  ]
+}

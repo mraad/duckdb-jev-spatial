@@ -1,0 +1,13 @@
+.venv/
+.uv-cache/
+.hf-cache/
+models/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+native/target/
+native/dist/
+backups/
+# data/: track only the sample dataset archive.
+data/*
+!data/NorthSea.tar.gz

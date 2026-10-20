@@ -1,0 +1,98 @@
+{
+  "checked_at": "2026-10-20T08:55:04.918546+00:00",
+  "change": "Removed FELN validation tooling, its optional dependencies, docs, and FELN-only artifacts",
+  "backup_directory": "~/GWorkspace/duckdb-jev-spatial/backups/before-cleanup-20261020T085227Z",
+  "backup_archive_sha256": "44771d2d411088d84979b038d305989ca11403f431a798dcd2b5b3bf8b3659a5",
+  "backup_file_count": 111,
+  "backup_readback_verified": true,
+  "deleted": [
+    "scripts/validate_feln.py",
+    "scripts/feln_support.py",
+    "tests/test_feln.py",
+    "docs/feln-validation.md",
+    "artifacts/feln-knowledge/",
+    "artifacts/feln-validation/",
+    "artifacts/feln-validation-locked/"
+  ],
+  "lockfile_packages_removed": [
+    "annotated-types",
+    "feln",
+    "layers-json",
+    "pydantic",
+    "pydantic-core",
+    "sqlglot",
+    "typing-inspection"
+  ],
+  "source_sha256": {
+    "jev_spatial/catalog.py": "0ec0632b6e6b2ee8fcb29dcaab5691b0b4d85fd65eeefc3d81ea7983b7e4ce9f",
+    "jev_spatial/planner.py": "e0d85a4355ac6b12c90ce8013450f57245d09df813163eff0e164cebad55a1fd",
+    "jev_spatial/engine.py": "07c120af29e30d5ebe9d6391d1a5c01c2aa524c8e1c19590c320103a00f5c766",
+    "jev_spatial/jev.py": "ac4eb6cd55eaa4a684fac4b5c62e6bd3886f17e33363350c67aed0962b8d5037",
+    "native/src/lib.rs": "47a7e1dfd5ac27f8419a826a638d22e6c637702454cedd0130807d17ea71349f"
+  },
+  "pytest_passed": 93,
+  "pytest_skipped": 0,
+  "rust_tests_passed": 4,
+  "clippy_warnings_denied": true,
+  "cargo_fmt_check": true,
+  "compileall": true,
+  "uv_lock_check": true,
+  "tev1": {
+    "requests": 256,
+    "valid": 256,
+    "correct": 250,
+    "all_non_latency_results_unchanged": true,
+    "compared_with": "artifacts/tev1-optimization/report.json",
+    "report": "artifacts/tev1-cleanup/report.json",
+    "log": "artifacts/cleanup-tev1.txt"
+  },
+  "database_sha256": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "database_unchanged": true,
+  "unchanged_files_checked": [
+    "jev_spatial/catalog.py",
+    "jev_spatial/planner.py",
+    "jev_spatial/engine.py",
+    "jev_spatial/jev.py",
+    "native/src/lib.rs"
+  ],
+  "limitations": [
+    "Six existing semantic errors remain",
+    "Sample English coverage 0/3,000 is retained from artifacts/metadata-update-validation.json",
+    "Containment example keeps three Laya false positives (687, 1197, 1341)"
+  ],
+  "smoke": {
+    "exact_ids": 106,
+    "exact_ids_match_baseline": true,
+    "laya_status_probe_unchanged": true,
+    "hybrid_false_positive_ids": [
+      4918,
+      5026
+    ],
+    "non_timing_results_unchanged_vs": "artifacts/northsea-optimization-smoke.json",
+    "report": "artifacts/northsea-cleanup-smoke.json"
+  },
+  "spatial_jev_examples": {
+    "counts": {
+      "deep_wells_near_jev_pipeline": 106,
+      "jev_pipelines_intersecting_discovery": 52,
+      "discoveries_containing_jev_deep_wells": 4,
+      "nearest_jev_pipeline_to_deep_well": 600
+    },
+    "containment_false_positive_ids": [
+      687,
+      1197,
+      1341
+    ],
+    "rows_unchanged": true,
+    "standalone_shell_output_unchanged": true,
+    "runtime_errors": 0,
+    "report": "artifacts/spatial-jev-cleanup.json",
+    "shell_output": "artifacts/spatial-jev-cleanup-shell.json"
+  },
+  "spatial_examples": {
+    "executed": 8,
+    "counts_and_first_five_unchanged": true,
+    "standalone_shell_exit_zero": true,
+    "report": "artifacts/spatial-examples-cleanup.json"
+  }
+}

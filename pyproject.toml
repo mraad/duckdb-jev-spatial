@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "duckdb-jev-spatial"
+version = "0.1.0"
+description = "Ontology-grounded spatial WHERE clauses and local Laya predicates for DuckDB"
+requires-python = ">=3.11"
+dependencies = ["duckdb==1.5.6", "PyYAML>=6", "pyarrow>=18", "pytz", "laya>=0.4.12"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+onnx-export = ["onnx==1.23.2", "onnxruntime==1.31.0", "onnxscript==0.7.2"]
+
+[project.scripts]
+jev-spatial = "jev_spatial.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["jev_spatial*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv.sources]
+laya = { path = "../laya" }

@@ -1,0 +1,38 @@
+{
+  "deep_wells_near_jev_pipeline": {
+    "count": 106,
+    "exact_count": 106,
+    "matches_exact": true,
+    "false_positive_ids": [],
+    "false_negative_ids": [],
+    "wrong_nearest_pair_ids": []
+  },
+  "jev_pipelines_intersecting_discovery": {
+    "count": 52,
+    "exact_count": 52,
+    "matches_exact": true,
+    "false_positive_ids": [],
+    "false_negative_ids": [],
+    "wrong_nearest_pair_ids": []
+  },
+  "discoveries_containing_jev_deep_wells": {
+    "count": 4,
+    "exact_count": 1,
+    "matches_exact": false,
+    "false_positive_ids": [
+      687,
+      1197,
+      1341
+    ],
+    "false_negative_ids": [],
+    "wrong_nearest_pair_ids": []
+  },
+  "nearest_jev_pipeline_to_deep_well": {
+    "count": 600,
+    "exact_count": 600,
+    "matches_exact": true,
+    "false_positive_ids": [],
+    "false_negative_ids": [],
+    "wrong_nearest_pair_ids": []
+  }
+}

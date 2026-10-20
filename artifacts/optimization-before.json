@@ -1,0 +1,84 @@
+{
+  "extension_sha256": "21ea1dcec279c588447f7718a0926da1f9bee2b9f598cbceedcc0a0d1aa1acfa",
+  "duckdb": "1.5.6",
+  "rows": 30000,
+  "repeats": 5,
+  "scope": "warm cache, four distinct states, one SQL thread, fetch all rows",
+  "cases": {
+    "probability_struct": {
+      "seconds": [
+        0.5141452089883387,
+        0.5127820000052452,
+        0.5072596250101924,
+        0.5115443749818951,
+        0.5109711249824613
+      ],
+      "median_seconds": 0.5115443749818951,
+      "rows_per_second": 58645.938587560035,
+      "stats": {
+        "backend": "rust-laya-onnx",
+        "version": "0.1.0",
+        "model_directory": "~/GWorkspace/duckdb-jev-spatial/models/laya-onnx/laya",
+        "evaluations": 4,
+        "cache_hits": 150000,
+        "cache_entries": 4,
+        "errors": 0,
+        "max_evaluations": 1000,
+        "clamped_temperatures": [
+          "choice:11+=0.10058280825614928"
+        ]
+      },
+      "answers_sha256": "9540a24707eb375321508bc8248b2c2088aab5fc999e2a4229bc9f6f996ef419"
+    },
+    "choice_struct": {
+      "seconds": [
+        0.8226254999171942,
+        0.8172640828415751,
+        0.8192529159132391,
+        0.8141484169755131,
+        0.8142340420745313
+      ],
+      "median_seconds": 0.8172640828415751,
+      "rows_per_second": 36707.84099026096,
+      "stats": {
+        "backend": "rust-laya-onnx",
+        "version": "0.1.0",
+        "model_directory": "~/GWorkspace/duckdb-jev-spatial/models/laya-onnx/laya",
+        "evaluations": 4,
+        "cache_hits": 150000,
+        "cache_entries": 4,
+        "errors": 0,
+        "max_evaluations": 1000,
+        "clamped_temperatures": [
+          "choice:11+=0.10058280825614928"
+        ]
+      },
+      "answers_sha256": "77e83b50d57e9a6c5ea3e12a0a57a15933fc8d513c8f0b0e0d954e4aeff093c9"
+    },
+    "raw_score_json": {
+      "seconds": [
+        0.6972997500561178,
+        0.6957266670651734,
+        0.6928482500370592,
+        0.6903189169242978,
+        0.6927034170366824
+      ],
+      "median_seconds": 0.6928482500370592,
+      "rows_per_second": 43299.52482148198,
+      "stats": {
+        "backend": "rust-laya-onnx",
+        "version": "0.1.0",
+        "model_directory": "~/GWorkspace/duckdb-jev-spatial/models/laya-onnx/laya",
+        "evaluations": 4,
+        "cache_hits": 150000,
+        "cache_entries": 4,
+        "errors": 0,
+        "max_evaluations": 1000,
+        "clamped_temperatures": [
+          "choice:11+=0.10058280825614928"
+        ]
+      },
+      "answers_sha256": "fc454e91112a498b086488d7e04050f42c4452c3429adfcc6ca21ce9c50d61ce"
+    }
+  }
+}

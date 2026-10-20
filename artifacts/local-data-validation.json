@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-10-20T09:59:00.199959+00:00",
+  "change": "Copied the NorthSea sample database and its planner metadata into data/NorthSea; examples use the local copy",
+  "source_directory": "~/Documents/ArcGIS/Projects/NorthSea",
+  "source_sha256": {
+    "data/NorthSea/NorthSea.ddb": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+    "data/NorthSea/NorthSea.ossie.yaml": "2b5736ce4ffe6689f5275a976432c0fa634e97eb123ac4ed95f07cd684ccba13",
+    "data/NorthSea/NorthSea.ontology.yaml": "bd000142abb39503d875dd0f684df2a805926cc9cf9f86e84270f9011c62dcb2",
+    "data/NorthSea/knowledge/datasets/Wells.md": "b415e7943dde2070ca27db1002187ed4dec0a18070f382cd4d791ce0bbfafef4",
+    "data/NorthSea/knowledge/datasets/Pipelines.md": "e68f8dfae81e84a42eaed8d681484fe6a380bba68c03cdf1bf4c2cf0f9c4fbad"
+  },
+  "copies_match_source": true,
+  "database_sha256_matches_recorded": true,
+  "checks_on_local_copy": {
+    "mixed_examples_shell_output_identical": true,
+    "exact_examples_shell_exit_zero": true,
+    "northsea_sql_exit_zero": true,
+    "planner_run_count": 106,
+    "smoke_result_ids_laya_probe_and_hybrid_unchanged": true,
+    "database_unchanged": true
+  },
+  "documentation_files_changed": [
+    ".gitignore",
+    "CLAUDE.md",
+    "README.md",
+    "docs/python-planner.md",
+    "docs/validation.md"
+  ],
+  "limitations": [
+    "The archive is not in a git repository yet; check Geodata redistribution terms before sharing it"
+  ],
+  "archive": {
+    "checked_at": "2026-10-20T10:11:14.616802+00:00",
+    "path": "data/NorthSea.tar.gz",
+    "sha256": "f834eccf2b2019ff099f028813524ae4ebd13562c579c79682a0d59d61e196bf",
+    "bytes": 5492944,
+    "files": 5,
+    "macos_metadata_excluded": true,
+    "extracted_files_identical_to_source": true,
+    "documented_procedure_followed": [
+      "tar -xzf data/NorthSea.tar.gz -C data",
+      "shasum -a 256 equals docs/validation.md"
+    ],
+    "checks_after_extraction": {
+      "exact_examples_exit_zero": true,
+      "mixed_shell_output_identical": true,
+      "planner_run_count": 106,
+      "smoke_unchanged": true,
+      "database_unchanged": true
+    },
+    "extracted_directory_gitignored": "data/NorthSea/",
+    "backup_directory": "~/GWorkspace/duckdb-jev-spatial/backups/before-data-archive-20261020T101005Z",
+    "owner_metadata": "uid 0, gid 0, empty user and group names"
+  }
+}

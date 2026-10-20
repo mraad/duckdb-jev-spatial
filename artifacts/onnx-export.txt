@@ -1,0 +1,46 @@
+W1019 18:12:55.743000 42727 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+
+=== models/laya ===
+  building model from config...
+  model loaded (421.3 M parameters)
+  rl_agent_config.json copied
+  tokenizer/  (2 files)
+  generating fixtures...
+  fixture single_noul     input_ids=(1, 77)  marker_pos=(1, 2)
+  fixture triage_4q       input_ids=(4, 110)  marker_pos=(4, 5)
+  wrote ~/GWorkspace/duckdb-jev-spatial/models/laya-onnx/laya/fixtures.npz
+  exporting to ONNX (opset=18)...
+W1019 18:12:59.805000 42727 torch/onnx/_internal/exporter/_registration.py:107] torchvision is not installed. Skipping torchvision::nms
+W1019 18:12:59.806000 42727 torch/onnx/_internal/exporter/_registration.py:107] torchvision is not installed. Skipping torchvision::roi_align
+W1019 18:12:59.806000 42727 torch/onnx/_internal/exporter/_registration.py:107] torchvision is not installed. Skipping torchvision::roi_pool
+W1019 18:12:59.806000 42727 torch/onnx/_internal/exporter/_registration.py:107] torchvision is not installed. Skipping torchvision::deform_conv2d
+Skipping constant folding for op Split with multiple outputs.
+Skipping constant folding for op Split with multiple outputs.
+Skipping constant folding for op Split with multiple outputs.
+Skipping constant folding for op Split with multiple outputs.
+~/GWorkspace/duckdb-jev-spatial/.venv/lib/python3.12/site-packages/torch/onnx/_internal/exporter/_onnx_program.py:486: UserWarning: # The axis name: batch will not be used, since it shares the same shape constraints with another axis: batch.
+  rename_mapping = _dynamic_shapes.create_rename_mapping(
+~/GWorkspace/duckdb-jev-spatial/.venv/lib/python3.12/site-packages/torch/onnx/_internal/exporter/_onnx_program.py:486: UserWarning: # The axis name: seq will not be used, since it shares the same shape constraints with another axis: seq.
+  rename_mapping = _dynamic_shapes.create_rename_mapping(
+~/GWorkspace/duckdb-jev-spatial/.venv/lib/python3.12/site-packages/torch/onnx/_internal/exporter/_onnx_program.py:486: UserWarning: # The axis name: markers will not be used, since it shares the same shape constraints with another axis: markers.
+  rename_mapping = _dynamic_shapes.create_rename_mapping(
+2026-10-19 18:13:21.511 python[42727:26532467] 2026-10-19 18:13:21.511201 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier
+[torch.onnx] Obtain model graph for `DecisionModel([...]` with `torch.export.export(..., strict=False)`...
+[torch.onnx] Obtain model graph for `DecisionModel([...]` with `torch.export.export(..., strict=False)`... ✅
+[torch.onnx] Run decompositions...
+[torch.onnx] Run decompositions... ✅
+[torch.onnx] Translate the graph into ONNX...
+[torch.onnx] Translate the graph into ONNX... ✅
+[torch.onnx] Optimize the ONNX graph...
+[torch.onnx] Optimize the ONNX graph... ✅
+  model.onnx 2.7 MB   model.onnx.data 1685.2 MB
+  verifying...
+  self-check against fixtures.npz:
+    single_noul     logits 1.611e-05  act_logits 9.766e-04  OK
+    triage_4q       logits 1.563e-05  act_logits 3.906e-03  OK
+  shape sweep: 6 seq_lens × 2 batch_sizes × 3 marker_counts = 36 combos
+  shape sweep done: 36 combos (PyTorch not available, shape/session checks only)
+  done in 32.4 s -> ~/GWorkspace/duckdb-jev-spatial/models/laya-onnx/laya
+
+export complete:
+  models/laya          -> ~/GWorkspace/duckdb-jev-spatial/models/laya-onnx/laya  (4 files)

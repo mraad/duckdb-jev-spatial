@@ -1,0 +1,136 @@
+{
+  "tested_at": "2026-10-20T09:11:47.351341+00:00",
+  "question": "Show all wells with depth > 350 meters and are within 5 km of an in-service pipeline",
+  "database": "~/Documents/ArcGIS/Projects/NorthSea/NorthSea.ddb",
+  "database_sha256": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "python": "3.12.12",
+  "duckdb": "1.5.6",
+  "parameters": [
+    350.0,
+    "IN SERVICE",
+    5000.0
+  ],
+  "interpretation": [
+    "metadata \u2192 knowledge/datasets; source files are hashed",
+    "depth \u2192 Wells.water_depth: Water depth at the well location, in meters.",
+    "in-service \u2192 Pipelines.current_phase = 'IN SERVICE' (any pipeline type)",
+    "distance \u2192 EPSG:3035 planar meters, longitude/latitude axis order",
+    "within distance is inclusive; relation uses EXISTS, returning each well once"
+  ],
+  "backend": "rust-laya-onnx",
+  "extension_sha256": "260ff0912f60c3c3bad6b197370c82f9b235165a571ea559bcb7b1978205679a",
+  "wells": 9299,
+  "depth_candidates": 600,
+  "pipelines": 73,
+  "in_service_pipelines": 63,
+  "exact_seconds": 0.19133049994707108,
+  "result_count": 106,
+  "baseline_count": 106,
+  "exact_ids_match": true,
+  "deterministic_model_calls": 0,
+  "examples": [
+    {
+      "OBJECTID": 13,
+      "nearest_pipeline_m": 518.932411349693
+    },
+    {
+      "OBJECTID": 432,
+      "nearest_pipeline_m": 2002.3703009673288
+    },
+    {
+      "OBJECTID": 481,
+      "nearest_pipeline_m": 2816.815958947898
+    },
+    {
+      "OBJECTID": 557,
+      "nearest_pipeline_m": 666.3828695506536
+    },
+    {
+      "OBJECTID": 690,
+      "nearest_pipeline_m": 736.2052998142161
+    }
+  ],
+  "model_load_seconds": 0.7641463750042021,
+  "model": {
+    "path": "models/laya-onnx/laya",
+    "device": "cpu",
+    "weights_sha256": "afcc11e72b59193fbec6e5dc8b693c9baa81cf66bec53279cefd687b318c3199"
+  },
+  "laya_status_probe": [
+    {
+      "phase": "ABANDONED IN PLACE",
+      "probability": 0.3833,
+      "accepted": false,
+      "choice": "abandoned",
+      "score": 0.6886
+    },
+    {
+      "phase": "DECOMMISSIONED",
+      "probability": 0.2223,
+      "accepted": false,
+      "choice": "decommissioned",
+      "score": 0.8982
+    },
+    {
+      "phase": "IN SERVICE",
+      "probability": 0.8996,
+      "accepted": true,
+      "choice": "in service",
+      "score": 0.9815
+    }
+  ],
+  "laya_probe_evaluations": 9,
+  "laya_probe_seconds": 0.35360862500965595,
+  "hybrid": {
+    "where": "jev(struct_pack(\"status\" := c.\"status\"), ?)",
+    "question": "Does the well status explicitly say that it is operating?",
+    "count": 2,
+    "unique_states_evaluated": 7,
+    "batches": null,
+    "seconds": 0.4497563331387937,
+    "known_operating_count": 0,
+    "false_positive_ids": [
+      4918,
+      5026
+    ],
+    "false_negative_ids": [],
+    "status_evidence": [
+      {
+        "status": "DRILLING",
+        "rows": 2,
+        "probability": 0.727
+      },
+      {
+        "status": "JUNKED",
+        "rows": 4,
+        "probability": 0.0343
+      },
+      {
+        "status": "P&A",
+        "rows": 85,
+        "probability": 0.2242
+      },
+      {
+        "status": "PLUGGED",
+        "rows": 9,
+        "probability": 0.089
+      },
+      {
+        "status": "SUSPENDED",
+        "rows": 2,
+        "probability": 0.0998
+      },
+      {
+        "status": "WILL NEVER BE DRILLED",
+        "rows": 3,
+        "probability": 0.1369
+      },
+      {
+        "status": null,
+        "rows": 1,
+        "probability": 0.1232
+      }
+    ]
+  },
+  "database_unchanged": true
+}

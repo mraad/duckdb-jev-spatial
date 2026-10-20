@@ -1,0 +1,246 @@
+{
+  "checked_at": "2026-10-19T23:55:15.839882+00:00",
+  "duckdb": "v1.5.6",
+  "database": "~/Documents/ArcGIS/Projects/NorthSea/NorthSea.ddb",
+  "database_sha256_before": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "database_sha256_after": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "sql_sha256": "c845ec2b55400dcb6799ab58c7824679b9d6c77f392b4e3778ddf68c72038548",
+  "extension_sha256": "6e172ff2509f0c0ef2a6259437d6dca7ae4e1750a7337d060afd01bc05ad89b8",
+  "backend": "native extension; spatial SQL only; no model loaded",
+  "geometry": {
+    "Wells": {
+      "rows": 9299,
+      "valid_nonempty_geometry": 9299
+    },
+    "Pipelines": {
+      "rows": 73,
+      "valid_nonempty_geometry": 73
+    },
+    "Discoveries": {
+      "rows": 1684,
+      "valid_nonempty_geometry": 1684
+    }
+  },
+  "examples": {
+    "deep_wells_near_pipeline": {
+      "count": 106,
+      "columns": [
+        "OBJECTID"
+      ],
+      "first_five": [
+        [
+          13
+        ],
+        [
+          432
+        ],
+        [
+          481
+        ],
+        [
+          557
+        ],
+        [
+          690
+        ]
+      ],
+      "sql": "SELECT w.OBJECTID\nFROM wells_m w\nWHERE w.water_depth > 350\n  AND EXISTS (\n    SELECT 1 FROM service_pipelines_m p\n    WHERE ST_DWithin(w.geom_m, p.geom_m, 5000)\n  )\nORDER BY w.OBJECTID;"
+    },
+    "deep_wells_without_near_pipeline": {
+      "count": 494,
+      "columns": [
+        "OBJECTID"
+      ],
+      "first_five": [
+        [
+          9
+        ],
+        [
+          10
+        ],
+        [
+          11
+        ],
+        [
+          12
+        ],
+        [
+          16
+        ]
+      ],
+      "sql": "SELECT w.OBJECTID\nFROM wells_m w\nWHERE w.water_depth > 350\n  AND NOT EXISTS (\n    SELECT 1 FROM service_pipelines_m p\n    WHERE ST_DWithin(w.geom_m, p.geom_m, 5000)\n  )\nORDER BY w.OBJECTID;"
+    },
+    "wells_within_discovery": {
+      "count": 4426,
+      "columns": [
+        "OBJECTID"
+      ],
+      "first_five": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "sql": "SELECT w.OBJECTID\nFROM wells_m w\nWHERE EXISTS (\n  SELECT 1 FROM discovery_areas d\n  WHERE ST_Within(w.geometry, d.geometry)\n)\nORDER BY w.OBJECTID;"
+    },
+    "pipelines_intersecting_discovery": {
+      "count": 52,
+      "columns": [
+        "OBJECTID"
+      ],
+      "first_five": [
+        [
+          3
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          9
+        ],
+        [
+          11
+        ]
+      ],
+      "sql": "SELECT p.OBJECTID\nFROM service_pipelines_m p\nWHERE EXISTS (\n  SELECT 1 FROM discovery_areas d\n  WHERE ST_Intersects(p.geometry, d.geometry)\n)\nORDER BY p.OBJECTID;"
+    },
+    "discoveries_containing_wells": {
+      "count": 1375,
+      "columns": [
+        "OBJECTID"
+      ],
+      "first_five": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "sql": "SELECT d.OBJECTID\nFROM discovery_areas d\nWHERE EXISTS (\n  SELECT 1 FROM wells_m w\n  WHERE ST_Contains(d.geometry, w.geometry)\n)\nORDER BY d.OBJECTID;"
+    },
+    "wells_outside_all_discoveries": {
+      "count": 4873,
+      "columns": [
+        "OBJECTID"
+      ],
+      "first_five": [
+        [
+          6
+        ],
+        [
+          13
+        ],
+        [
+          15
+        ],
+        [
+          19
+        ],
+        [
+          21
+        ]
+      ],
+      "sql": "SELECT w.OBJECTID\nFROM wells_m w\nWHERE NOT EXISTS (\n  SELECT 1 FROM discovery_areas d\n  WHERE ST_Intersects(w.geometry, d.geometry)\n)\nORDER BY w.OBJECTID;"
+    },
+    "deep_wells_within_discovery_near_pipeline": {
+      "count": 72,
+      "columns": [
+        "OBJECTID"
+      ],
+      "first_five": [
+        [
+          557
+        ],
+        [
+          882
+        ],
+        [
+          1161
+        ],
+        [
+          1183
+        ],
+        [
+          1282
+        ]
+      ],
+      "sql": "SELECT w.OBJECTID\nFROM wells_m w\nWHERE w.water_depth > 350\n  AND EXISTS (\n    SELECT 1 FROM discovery_areas d\n    WHERE ST_Within(w.geometry, d.geometry)\n  )\n  AND EXISTS (\n    SELECT 1 FROM service_pipelines_m p\n    WHERE ST_DWithin(w.geom_m, p.geom_m, 5000)\n  )\nORDER BY w.OBJECTID;"
+    },
+    "nearest_pipeline_to_deep_well": {
+      "count": 600,
+      "columns": [
+        "well_id",
+        "pipeline_id",
+        "distance_m"
+      ],
+      "first_five": [
+        [
+          9,
+          54,
+          284605.2522526773
+        ],
+        [
+          10,
+          54,
+          225729.350862902
+        ],
+        [
+          11,
+          54,
+          164492.49139379573
+        ],
+        [
+          12,
+          54,
+          133757.73796536107
+        ],
+        [
+          13,
+          64,
+          518.932411349693
+        ]
+      ],
+      "sql": "SELECT w.OBJECTID AS well_id, nearest.pipeline_id, nearest.distance_m\nFROM wells_m w\nCROSS JOIN LATERAL (\n  SELECT p.OBJECTID AS pipeline_id,\n         ST_Distance(w.geom_m, p.geom_m) AS distance_m\n  FROM service_pipelines_m p\n  ORDER BY distance_m, p.OBJECTID\n  LIMIT 1\n) nearest\nWHERE w.water_depth > 350\nORDER BY w.OBJECTID;"
+    }
+  },
+  "checks": [
+    "Unique primary IDs in all eight results",
+    "Distance membership equals independent minimum-distance baseline",
+    "Near/far partition all 600 deep wells",
+    "Nearest distances equal independent grouped minimum",
+    "Combined relations equal intersection of individual ID sets",
+    "Contains/within, intersects/disjoint, and exclusion set comparisons agree",
+    "Synthetic boundary point excluded by within and contains, included by intersects and touches",
+    "Distance boundary at 5000 meters is included",
+    "Database SHA-256 unchanged",
+    "Standalone DuckDB shell result counts match all eight queries",
+    "All 13 README SQL blocks execute in order with native local inference",
+    "README SQL examples match the executable SQL file",
+    "README semantic diagnostic reproduces the two documented DRILLING false positives"
+  ],
+  "readme_sha256": "8c9ba385eea8ba01f9ec7c2dfb9c48204a096ef9095a893209a2d00ad8d7c96e"
+}

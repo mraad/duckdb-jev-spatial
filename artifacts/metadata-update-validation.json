@@ -1,0 +1,66 @@
+{
+  "checked_at": "2026-10-20T07:52:58.977534+00:00",
+  "backup_directory": "~/GWorkspace/duckdb-jev-spatial/backups/before-knowledge-metadata-20261020T074748Z",
+  "backup_archive_sha256": "2a59928ea808f28d52967bef83b40c3c4160674910820f44e0d5e9683c05cbf5",
+  "backup_file_count": 72,
+  "backup_readback_verified": true,
+  "changed_existing_files": [
+    ".gitignore",
+    "README.md",
+    "docs/integration.md",
+    "docs/native-extension.md",
+    "docs/overview.html",
+    "docs/python-backend.md",
+    "docs/upstream-review.md",
+    "jev_spatial/catalog.py",
+    "tests/conftest.py"
+  ],
+  "new_source_and_doc_files": [
+    "tests/test_catalog.py",
+    "docs/metadata-layout.md"
+  ],
+  "source_sha256": {
+    "jev_spatial/catalog.py": "0ec0632b6e6b2ee8fcb29dcaab5691b0b4d85fd65eeefc3d81ea7983b7e4ce9f",
+    "tests/conftest.py": "27eb357febc4a920b5122d806165ac22d8f71c696ebe2a3c9b694022d5c031f0",
+    "tests/test_catalog.py": "ce5f8542d97e85658b636bc61d7cca5c137ccdfd5d78807fee5bd5088173dc9b"
+  },
+  "metadata_sources": {
+    "~/Documents/ArcGIS/Projects/NorthSea/NorthSea.ossie.yaml": "2b5736ce4ffe6689f5275a976432c0fa634e97eb123ac4ed95f07cd684ccba13",
+    "~/Documents/ArcGIS/Projects/NorthSea/NorthSea.ontology.yaml": "bd000142abb39503d875dd0f684df2a805926cc9cf9f86e84270f9011c62dcb2",
+    "~/Documents/ArcGIS/Projects/NorthSea/knowledge/datasets/Wells.md": "b415e7943dde2070ca27db1002187ed4dec0a18070f382cd4d791ce0bbfafef4",
+    "~/Documents/ArcGIS/Projects/NorthSea/knowledge/datasets/Pipelines.md": "e68f8dfae81e84a42eaed8d681484fe6a380bba68c03cdf1bf4c2cf0f9c4fbad"
+  },
+  "metadata_unchanged_after_validation": true,
+  "preferred_layout": "knowledge/datasets",
+  "legacy_layout": "okf",
+  "partial_knowledge_fallback": false,
+  "pytest_passed": 100,
+  "english_planner_revalidated": true,
+  "stored_sql_replay_used": false,
+  "cli_count": 106,
+  "smoke_exact_id_match": true,
+  "tev1": {
+    "requests": 256,
+    "valid": 256,
+    "correct": 250,
+    "predictions_and_probabilities_unchanged": true,
+    "report": "artifacts/tev1-knowledge/report.json"
+  },
+  "feln": {
+    "reference_executed": 3000,
+    "structured_exact_matches": 1753,
+    "unsupported": 1247,
+    "english_accepted": 0,
+    "report": "artifacts/feln-knowledge/report.json"
+  },
+  "database_sha256": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "database_unchanged": true,
+  "native_binary_unchanged": true,
+  "native_extension_sha256": "21ea1dcec279c588447f7718a0926da1f9bee2b9f598cbceedcc0a0d1aa1acfa",
+  "limitations": [
+    "Six existing semantic failures remain",
+    "Bounded English grammar is unchanged",
+    "Native Rust tests and throughput benchmarks were not rerun; native source and binary unchanged"
+  ],
+  "documentation_links_checked": 110
+}

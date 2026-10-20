@@ -1,0 +1,245 @@
+{
+  "provider": "local_in_process",
+  "model": "~/GWorkspace/duckdb-jev-spatial/models/laya",
+  "framework": "~/GWorkspace/tev1",
+  "finished_utc": "2026-10-19T21:45:22.603401+00:00",
+  "framework_sha256": {
+    "examples/decide.py": "d0bfb6add3a9b87475737568613c40f48c8f0bc927574351ce558da87db640bb",
+    "scripts/evaluate.py": "f2defd45ed40cb41af3238e6b4564a8fa0c9085d81eeb0a60e38a02f57f3b1a7"
+  },
+  "records_sha256": "488ac5dad8f722324a376dbafc004782a8256ba555e36ba397fd2b02ad790c7e",
+  "weights_sha256": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c",
+  "database_sha256": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "database_unchanged": true,
+  "offline": true,
+  "python_socket_connections_blocked": true,
+  "transport_note": "status=200 denotes local success; http_errors is tev1 compatibility terminology, no HTTP requests were made",
+  "scope": "Balanced SQL membership sample and all distinct NorthSea well/pipeline statuses; development checks, not a held-out accuracy benchmark",
+  "sql_full_id_set_matches_baseline": true,
+  "sql_full_result_count": 106,
+  "laya_unique_evaluations": 25,
+  "latency_note": "Includes query/cache effects; not a throughput benchmark",
+  "requests": 256,
+  "correct": 250,
+  "accuracy": 0.9765625,
+  "valid": 256,
+  "http_errors": 0,
+  "by_expected_key": {
+    "abandoned": {
+      "requests": 2,
+      "correct": 2,
+      "accuracy": 1.0,
+      "valid": 2,
+      "http_errors": 0
+    },
+    "decommissioned": {
+      "requests": 2,
+      "correct": 2,
+      "accuracy": 1.0,
+      "valid": 2,
+      "http_errors": 0
+    },
+    "in_service": {
+      "requests": 2,
+      "correct": 2,
+      "accuracy": 1.0,
+      "valid": 2,
+      "http_errors": 0
+    },
+    "no": {
+      "requests": 140,
+      "correct": 134,
+      "accuracy": 0.9571428571428572,
+      "valid": 140,
+      "http_errors": 0
+    },
+    "yes": {
+      "requests": 110,
+      "correct": 110,
+      "accuracy": 1.0,
+      "valid": 110,
+      "http_errors": 0
+    }
+  },
+  "by_source": {
+    "laya_pipeline_choice": {
+      "requests": 6,
+      "correct": 6,
+      "accuracy": 1.0,
+      "valid": 6,
+      "http_errors": 0,
+      "by_expected_key": {
+        "abandoned": {
+          "requests": 2,
+          "correct": 2,
+          "accuracy": 1.0,
+          "valid": 2,
+          "http_errors": 0
+        },
+        "decommissioned": {
+          "requests": 2,
+          "correct": 2,
+          "accuracy": 1.0,
+          "valid": 2,
+          "http_errors": 0
+        },
+        "in_service": {
+          "requests": 2,
+          "correct": 2,
+          "accuracy": 1.0,
+          "valid": 2,
+          "http_errors": 0
+        }
+      }
+    },
+    "laya_pipeline_noul": {
+      "requests": 6,
+      "correct": 6,
+      "accuracy": 1.0,
+      "valid": 6,
+      "http_errors": 0,
+      "by_expected_key": {
+        "no": {
+          "requests": 4,
+          "correct": 4,
+          "accuracy": 1.0,
+          "valid": 4,
+          "http_errors": 0
+        },
+        "yes": {
+          "requests": 2,
+          "correct": 2,
+          "accuracy": 1.0,
+          "valid": 2,
+          "http_errors": 0
+        }
+      }
+    },
+    "laya_well_noul": {
+      "requests": 32,
+      "correct": 26,
+      "accuracy": 0.8125,
+      "valid": 32,
+      "http_errors": 0,
+      "by_expected_key": {
+        "no": {
+          "requests": 30,
+          "correct": 24,
+          "accuracy": 0.8,
+          "valid": 30,
+          "http_errors": 0
+        },
+        "yes": {
+          "requests": 2,
+          "correct": 2,
+          "accuracy": 1.0,
+          "valid": 2,
+          "http_errors": 0
+        }
+      }
+    },
+    "spatial_sql_membership": {
+      "requests": 212,
+      "correct": 212,
+      "accuracy": 1.0,
+      "valid": 212,
+      "http_errors": 0,
+      "by_expected_key": {
+        "no": {
+          "requests": 106,
+          "correct": 106,
+          "accuracy": 1.0,
+          "valid": 106,
+          "http_errors": 0
+        },
+        "yes": {
+          "requests": 106,
+          "correct": 106,
+          "accuracy": 1.0,
+          "valid": 106,
+          "http_errors": 0
+        }
+      }
+    }
+  },
+  "failures": [
+    {
+      "id": "well-status-3-order0",
+      "source": "laya_well_noul",
+      "group_id": "well-status-3",
+      "expected": "B",
+      "expected_key": "no",
+      "status": 200,
+      "valid": true,
+      "correct": false,
+      "predicted_key": "yes",
+      "probability": 0.6077,
+      "latency_ms": 56.91
+    },
+    {
+      "id": "well-status-3-order1",
+      "source": "laya_well_noul",
+      "group_id": "well-status-3",
+      "expected": "A",
+      "expected_key": "no",
+      "status": 200,
+      "valid": true,
+      "correct": false,
+      "predicted_key": "yes",
+      "probability": 0.6077,
+      "latency_ms": 0.731
+    },
+    {
+      "id": "well-status-5-order0",
+      "source": "laya_well_noul",
+      "group_id": "well-status-5",
+      "expected": "B",
+      "expected_key": "no",
+      "status": 200,
+      "valid": true,
+      "correct": false,
+      "predicted_key": "yes",
+      "probability": 0.6025,
+      "latency_ms": 55.919
+    },
+    {
+      "id": "well-status-5-order1",
+      "source": "laya_well_noul",
+      "group_id": "well-status-5",
+      "expected": "A",
+      "expected_key": "no",
+      "status": 200,
+      "valid": true,
+      "correct": false,
+      "predicted_key": "yes",
+      "probability": 0.6025,
+      "latency_ms": 0.697
+    },
+    {
+      "id": "well-status-6-order0",
+      "source": "laya_well_noul",
+      "group_id": "well-status-6",
+      "expected": "B",
+      "expected_key": "no",
+      "status": 200,
+      "valid": true,
+      "correct": false,
+      "predicted_key": "yes",
+      "probability": 0.727,
+      "latency_ms": 55.476
+    },
+    {
+      "id": "well-status-6-order1",
+      "source": "laya_well_noul",
+      "group_id": "well-status-6",
+      "expected": "A",
+      "expected_key": "no",
+      "status": 200,
+      "valid": true,
+      "correct": false,
+      "predicted_key": "yes",
+      "probability": 0.727,
+      "latency_ms": 0.749
+    }
+  ]
+}

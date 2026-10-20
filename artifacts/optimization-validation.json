@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-10-20T08:05:47.628135+00:00",
+  "backup_directory": "~/GWorkspace/duckdb-jev-spatial/backups/before-optimization-20261020T075758Z",
+  "backup_archive_sha256": "319f99228024fe7951457cdfccc18e5bdd38db51a72531e03dd6d8fdcc8649aa",
+  "backup_file_count": 85,
+  "backup_readback_verified": true,
+  "native_extension_sha256": "260ff0912f60c3c3bad6b197370c82f9b235165a571ea559bcb7b1978205679a",
+  "source_sha256": {
+    "native/src/lib.rs": "47a7e1dfd5ac27f8419a826a638d22e6c637702454cedd0130807d17ea71349f",
+    "tests/test_native.py": "6688690faeb52a42878f089b0b4e85478e532dabf8f4d54b864bafb322d88b9f",
+    "scripts/benchmark_native.py": "bcc92a03ca1371cb8c8aeaf637d3e3ec85d4a184fea62ca84212161adac9d0d2"
+  },
+  "pytest_passed": 105,
+  "rust_tests_passed": 4,
+  "clippy_warnings_denied": true,
+  "cargo_fmt_check": true,
+  "benchmark": {
+    "probability_struct": {
+      "before_median_seconds": 0.5115443749818951,
+      "after_median_seconds": 0.21702012489549816,
+      "speedup": 2.357128746599973,
+      "answers_unchanged": true
+    },
+    "choice_struct": {
+      "before_median_seconds": 0.8172640828415751,
+      "after_median_seconds": 0.30856004101224244,
+      "speedup": 2.6486387549097756,
+      "answers_unchanged": true
+    },
+    "raw_score_json": {
+      "before_median_seconds": 0.6928482500370592,
+      "after_median_seconds": 0.4873441660311073,
+      "speedup": 1.4216816334943763,
+      "answers_unchanged": true
+    }
+  },
+  "benchmark_scope": "warm cache, four distinct states, one SQL thread, fetch all rows",
+  "benchmark_build_profile": "development",
+  "tev1": {
+    "requests": 256,
+    "valid": 256,
+    "correct": 250,
+    "all_non_latency_results_unchanged": true,
+    "report": "artifacts/tev1-optimization/report.json"
+  },
+  "smoke_exact_ids": 106,
+  "smoke_exact_ids_unchanged": true,
+  "standalone_shell_output_unchanged": true,
+  "database_sha256": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "database_unchanged": true,
+  "metadata_unchanged": true,
+  "unchanged_files_checked": [
+    "jev_spatial/catalog.py",
+    "jev_spatial/planner.py",
+    "jev_spatial/engine.py",
+    "native/Cargo.toml",
+    "native/Cargo.lock",
+    "native/spatial-examples.sql",
+    "native/northsea.sql"
+  ],
+  "not_rerun": [
+    "full FELN corpus",
+    "eight spatial examples"
+  ],
+  "not_measured": [
+    "cold inference performance",
+    "release build performance",
+    "concurrent query performance",
+    "cache memory use"
+  ],
+  "limitations": [
+    "Six existing semantic errors remain",
+    "Native inference has no multi-state batching"
+  ],
+  "documentation_local_links_checked": 123
+}
