@@ -6,25 +6,29 @@ The [terms](../README.md#terms) in the README apply.
 
 ## Current results
 
-The checks ran on 2026-10-20 on macOS arm64.
-They used DuckDB 1.5.6, Python 3.12, and the development build of the native extension.
+The checks ran on 2026-11-18 on macOS arm64.
+They used DuckDB 2.0.0, Python 3.12, and the development build of the native extension.
+All NorthSea results are equal to the DuckDB 1.5.6 results.
 
 | Check | Result | Record |
 |---|---|---|
-| Python tests, with native model checks | 93 passed; 0 skipped | [cleanup-validation.json](../artifacts/cleanup-validation.json) |
-| Native Rust unit tests | 4 passed | [cleanup-validation.json](../artifacts/cleanup-validation.json) |
-| Clippy with warnings denied | Passed | [cleanup-validation.json](../artifacts/cleanup-validation.json) |
-| rustfmt check | Passed | [cleanup-validation.json](../artifacts/cleanup-validation.json) |
-| NorthSea smoke test | 106 IDs; equal to the independent baseline | [northsea-cleanup-smoke.json](../artifacts/northsea-cleanup-smoke.json) |
-| Exact spatial examples | 8 executed; counts and first rows unchanged | [spatial-examples-cleanup.json](../artifacts/spatial-examples-cleanup.json) |
-| Mixed spatial and semantic examples | 106, 52, 4, and 600 rows; 3 false positives | [spatial-jev-cleanup.json](../artifacts/spatial-jev-cleanup.json) |
-| Mixed examples in the DuckDB shell, with no Python process | Output equal to the previous run | [spatial-jev-cleanup-shell.json](../artifacts/spatial-jev-cleanup-shell.json) |
-| tev1 outputs | 256/256 valid; 250/256 correct | [tev1-cleanup report](../artifacts/tev1-cleanup/report.json) |
-| tev1 spatial membership cases | 212/212 correct | [tev1-cleanup report](../artifacts/tev1-cleanup/report.json) |
-| tev1 semantic cases | 38/44 correct | [tev1-cleanup report](../artifacts/tev1-cleanup/report.json) |
-| Model evaluations in the tev1 run | 25 | [tev1-cleanup report](../artifacts/tev1-cleanup/report.json) |
+| Python tests, with native model checks | 95 passed; 0 skipped | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
+| Native Rust unit tests | 4 passed | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
+| Clippy with warnings denied | Passed | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
+| rustfmt check | Passed | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
+| NorthSea smoke test | 106 IDs; equal to the independent baseline | [northsea-smoke.json](../artifacts/duckdb2/northsea-smoke.json) |
+| Exact spatial examples in the DuckDB shell | 8 executed; counts unchanged | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
+| Mixed spatial and semantic examples | 106, 52, 4, and 600 rows; 3 false positives | [spatial-jev.json](../artifacts/duckdb2/spatial-jev.json) |
+| Mixed examples in the DuckDB shell, with no Python process | Result sets equal to the previous run | [spatial-jev-shell.json](../artifacts/duckdb2/spatial-jev-shell.json) |
+| Capital selection example, Laya | Threshold: 14/20 rows correct. Top city for each country: 9/10 correct | [capitals-example-validation.json](../artifacts/capitals-example-validation.json) |
+| Capital question, larger models | Local Qwen3-8B: 20/20 and 18/20. gpt-5.6-sol through the Azure gateway: 20/20 and 20/20 | [larger-models.json](../artifacts/capitals-example/larger-models.json) |
+| Cache benchmark, 30,000 rows from the cache | 0.295 s, 0.420 s, and 0.666 s; answers unchanged; about 36% slower than on DuckDB 1.5.6 | [benchmark.json](../artifacts/duckdb2/benchmark.json) |
+| tev1 outputs | 256/256 valid; 250/256 correct | [tev1 report](../artifacts/duckdb2/tev1/report.json) |
+| tev1 spatial membership cases | 212/212 correct | [tev1 report](../artifacts/duckdb2/tev1/report.json) |
+| tev1 semantic cases | 38/44 correct | [tev1 report](../artifacts/duckdb2/tev1/report.json) |
+| Model evaluations in the tev1 run | 25 | [tev1 report](../artifacts/duckdb2/tev1/report.json) |
 | Sample English coverage | 0/3,000 sample corpus questions accepted by the planner | [metadata-update-validation.json](../artifacts/metadata-update-validation.json) |
-| Source database SHA-256 | Unchanged | [cleanup-validation.json](../artifacts/cleanup-validation.json) |
+| Source database SHA-256 | Unchanged | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
 
 The database SHA-256 is `37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f`.
 The ONNX model weights SHA-256 is `afcc11e72b59193fbec6e5dc8b693c9baa81cf66bec53279cefd687b318c3199`.
@@ -75,6 +79,81 @@ Laya clamps the temperature to 0.5 for choices with 11 or more options.
 No check uses 11 or more options.
 This result does not show calibration for any NorthSea classification.
 An operational threshold needs a separate evaluation of the model probabilities.
+
+### Capital answers
+
+`native/capitals-example.sql` asks "Is this city the capital of its country?" for 20 cities.
+The ground truth is in the validation record only. The SQL file does not contain it.
+The first three queries use the first wording. That wording was written before any result was known.
+
+| City | Country | P(capital) | Expected | Result |
+|---|---|---:|---|---|
+| Istanbul | Turkey | 0.805 | no | false positive |
+| Rio de Janeiro | Brazil | 0.801 | no | false positive |
+| Ottawa | Canada | 0.420 | yes | false negative |
+| Oslo | Norway | 0.439 | yes | false negative |
+| Canberra | Australia | 0.207 | yes | false negative |
+| Ankara | Turkey | 0.132 | yes | false negative |
+
+The other 14 rows are correct.
+The model tends to accept the largest or best-known city of a country.
+Thus Oslo (about 1,340 km from Paris) is missing from the 1,500 km result.
+
+#### Other wordings of the question
+
+The check asked 10 wordings of the yes or no question.
+It used two sets of cities: the 20 example cities, and 20 other cities in 10 other countries.
+In each country of the second set, the largest city is not the capital.
+The second set is the check for a wording that was selected on the first set.
+
+"Top city" counts the countries where the capital has a higher probability than the other city.
+
+| Question | Example cities, threshold 0.5 | Example cities, top city | Other cities, threshold 0.5 | Other cities, top city |
+|---|---:|---:|---:|---:|
+| Is this city the capital of its country? (first wording) | 14/20 | 8/10 | 14/20 | 8/10 |
+| Is this city the capital city of the country? | 10/20 | 9/10 | 12/20 | 6/10 |
+| Is this city the official capital of this country, where the national government has its seat? | 13/20 | 9/10 | 17/20 | 9/10 |
+| Is the seat of the national government of this country in this city? | 12/20 | 8/10 | 10/20 | 5/10 |
+| Is the national government of the country located in this city? | 10/20 | 6/10 | 10/20 | 6/10 |
+| Is this city the political capital of the country? The largest city is not always the capital. | 12/20 | 7/10 | 8/20 | 4/10 |
+| Does the national parliament of this country meet in this city? | 11/20 | 7/10 | 11/20 | 7/10 |
+| Is this the capital? | 11/20 | 7/10 | 14/20 | 9/10 |
+| Is {city} the capital of {country}? (names written in the question) | 13/20 | 6/10 | 14/20 | 9/10 |
+| Is the capital of this country this city, and not another city? | 14/20 | 9/10 | 16/20 | 9/10 |
+
+No wording is better than the first wording at the 0.5 threshold on the example cities.
+The results change much between wordings that have the same meaning.
+Thus Laya does not have reliable knowledge of capitals. A new wording does not correct this.
+
+The fourth query in the SQL file uses the last wording and keeps the top city of each country.
+It gives 9 of 10 correct countries. It selects Istanbul for Turkey.
+On the other cities, it also gives 9 of 10. It selects Auckland for New Zealand.
+This query assumes that the table contains the capital of each country.
+
+A `jev_choice` question between the two cities of a country was also tested.
+The answer follows the option order: 10/10 with the capital as the first option, and 5/10 with the capital as the second option.
+With "What is the capital city of this country?" on the other cities, the results are 9/10 and 3/10.
+Do not use `jev_choice` for this task.
+
+The run of the SQL file used 40 model evaluations and 40 cache hits on DuckDB 2.0.0.
+
+#### Larger models
+
+`scripts/try_larger_models.py` asks a general language model the first wording, one city for each request.
+The script is a trial. It is not a Jev backend, and SQL cannot call it.
+
+| Model | Example cities | Other cities |
+|---|---:|---:|
+| Laya (421M parameters), threshold 0.5 | 14/20 | 14/20 |
+| Qwen3-8B, Q4_K_M, local `llama-server` 1.0.0, no network | 20/20 | 18/20 |
+| gpt-5.6-sol (deployment `gpt-5.6-sol-2026-07-09`), IST AzureAI API Gateway DEV tier | 20/20 | 20/20 |
+
+The gpt-5.6-sol run is not local. It sends the city and country names to the gateway, and it needs a subscription key.
+The gateway DEV tier is for research and development only.
+Qwen3-8B answers "no" for Bern and Pretoria. gpt-5.6-sol answers "yes" for both.
+Switzerland has no capital in law, and South Africa has three capitals. Thus these two answers are not clear errors.
+The Claude run did not start, because the shell has no `ANTHROPIC_API_KEY`. The `--claude` option of the script is not tested.
+The duckdb shell was not run, because the shell on `PATH` is version 2.0.0.
 
 ## Run the checks
 
@@ -326,6 +405,9 @@ They do not change the database or the NorthSea metadata.
 | 2026-10-20 | Removal of the reference-plan validation tool | 93 | 4 | All results unchanged | [cleanup-validation.json](../artifacts/cleanup-validation.json) |
 | 2026-10-20 | Documentation consolidation | Not run | Not run | 10 files merged into 5; no broken links | [readme-consolidation-validation.json](../artifacts/readme-consolidation-validation.json) |
 | 2026-10-20 | Local sample dataset archive | Not run | Not run | Archive files equal to the source; examples unchanged | [local-data-validation.json](../artifacts/local-data-validation.json) |
+| 2026-11-18 | Capital selection example, with a rewording study | Not run | Not run | Threshold 14/20 rows; top city 9/10 countries; no source change | [capitals-example-validation.json](../artifacts/capitals-example-validation.json) |
+| 2026-11-18 | DuckDB 2.0.0 and a larger-model trial | 95 | 4 | All NorthSea results equal to DuckDB 1.5.6; Qwen3-8B 20/20 and 18/20, gpt-5.6-sol 20/20 and 20/20 on the capital question | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
+| 2026-11-18 | Audit fixes: option rule, abstain branch, shared baseline query, CLI metadata errors | 95 | Not run | 106 IDs; tev1 256 valid, 250 correct; tev1 records unchanged | [audit-fixes-validation.json](../artifacts/audit-fixes-validation.json) |
 
 Older records can name artifacts that were later pruned.
 Commit `fafa195` contains those files.
@@ -414,6 +496,19 @@ Each row equaled its first answer. The answer hashes were equal in both builds.
 Each case made four model evaluations, 150,000 cache hits, and zero errors.
 These results apply only to answers that are already in the cache.
 See the [before](../artifacts/optimization-before.json) and [after](../artifacts/optimization-after.json) measurements.
+
+The benchmark ran again on DuckDB 2.0.0 on 2026-11-18, with the same machine, profile, rows, and method.
+
+| Query | DuckDB 1.5.6 | DuckDB 2.0.0 | Change |
+|---|---:|---:|---:|
+| Probability from STRUCT | 0.217 s | 0.295 s | 1.36× slower |
+| Choice from STRUCT | 0.309 s | 0.420 s | 1.36× slower |
+| Raw score JSON from JSON input | 0.487 s | 0.666 s | 1.37× slower |
+
+The answer hashes are equal to the DuckDB 1.5.6 hashes.
+A second run gave the same times within 1%.
+The cause of the slower times is not known. It was not examined.
+See the [DuckDB 2.0.0 measurement](../artifacts/duckdb2/benchmark.json).
 
 ## Backups
 

@@ -1,0 +1,91 @@
+{
+ "Which city is the capital of this country?|dev|capital first": {
+  "correct": 10,
+  "wrong": []
+ },
+ "Which city is the capital of this country?|dev|capital second": {
+  "correct": 5,
+  "wrong": [
+   "Canada",
+   "Turkey",
+   "Brazil",
+   "Norway",
+   "Kenya"
+  ]
+ },
+ "Which city is the capital of this country?|dev|alphabetical": {
+  "correct": 8,
+  "wrong": [
+   "Norway",
+   "Kenya"
+  ]
+ },
+ "Which city is the capital of this country?|held|capital first": {
+  "correct": 10,
+  "wrong": []
+ },
+ "Which city is the capital of this country?|held|capital second": {
+  "correct": 5,
+  "wrong": [
+   "United States",
+   "Switzerland",
+   "Nigeria",
+   "South Africa",
+   "Vietnam"
+  ]
+ },
+ "Which city is the capital of this country?|held|alphabetical": {
+  "correct": 8,
+  "wrong": [
+   "United States",
+   "South Africa"
+  ]
+ },
+ "What is the capital city of this country?|dev|capital first": {
+  "correct": 10,
+  "wrong": []
+ },
+ "What is the capital city of this country?|dev|capital second": {
+  "correct": 5,
+  "wrong": [
+   "Australia",
+   "Canada",
+   "Turkey",
+   "Brazil",
+   "Kenya"
+  ]
+ },
+ "What is the capital city of this country?|dev|alphabetical": {
+  "correct": 9,
+  "wrong": [
+   "Kenya"
+  ]
+ },
+ "What is the capital city of this country?|held|capital first": {
+  "correct": 9,
+  "wrong": [
+   "Nigeria"
+  ]
+ },
+ "What is the capital city of this country?|held|capital second": {
+  "correct": 3,
+  "wrong": [
+   "United States",
+   "China",
+   "Switzerland",
+   "Nigeria",
+   "South Africa",
+   "New Zealand",
+   "Vietnam"
+  ]
+ },
+ "What is the capital city of this country?|held|alphabetical": {
+  "correct": 6,
+  "wrong": [
+   "United States",
+   "Nigeria",
+   "South Africa",
+   "New Zealand"
+  ]
+ }
+}

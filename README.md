@@ -40,7 +40,7 @@ The documentation uses each term with one meaning only.
 
 ## Requirements
 
-The tested build is for DuckDB 1.5.6 on macOS arm64.
+The tested build is for DuckDB 2.0.0 on macOS arm64.
 The native extension is an unsigned development build.
 Source control excludes the native extension and the model files.
 
@@ -51,13 +51,13 @@ To use a different dataset, replace `data/NorthSea` with its dataset directory.
 
 Setup requires these items:
 
-- The DuckDB 1.5.6 shell.
+- The DuckDB 2.0.0 shell.
 - A Rust toolchain.
 - `uv` and Python 3.12.
 - The Laya checkout at `../laya`.
 
-The native extension targets DuckDB 1.5.6 exactly.
-Its Rust bindings use the unstable DuckDB C extension API.
+The native extension is tested with DuckDB 2.0.0 only.
+The build script accepts only the DuckDB 2.0.0 Python package.
 Other platforms, GPU providers, and signed distribution are not tested.
 
 ## Extract the sample dataset
@@ -606,6 +606,39 @@ ORDER BY w.OBJECTID;
 The lowest pipeline ID breaks an equal-distance tie. There is no 5 km limit.
 A well has no result row if no pipeline passes the semantic filter.
 The distance is between geometries. It is not a distance along a pipeline.
+
+## Select capitals without a capital column
+
+`native/capitals-example.sql` creates an in-memory table with three columns: `location`, `city`, and `country`.
+The table has 20 cities in 10 countries. Each country has its capital and one other large city.
+No column tells which city is the capital.
+Jev uses only the city and country text to make the decision.
+DuckDB evaluates the geometry.
+The example does not use the NorthSea database.
+
+1. Set `ORT_DYLIB_PATH` as in [Set up the native extension](#set-up-the-native-extension).
+2. Run the example in a DuckDB 2.0.0 shell.
+
+   ```sh
+   duckdb -unsigned < native/capitals-example.sql
+   ```
+
+The semantic filter:
+
+```sql
+SELECT city, country, ST_AsText(location) AS location
+FROM cities
+WHERE jev({'city': city, 'country': country},
+          'Is this city the capital of its country?')
+ORDER BY country, city;
+```
+
+The file also shows the probability for each city.
+It also combines the filter with a 1,500 km distance limit from Paris.
+The file sets `geometry_always_xy = true`. DuckDB 2.0 requires this setting for `ST_Distance_Sphere`.
+The last query keeps the city with the highest probability in each country. It uses no threshold.
+The model makes errors on this table. [Capital answers](docs/validation.md#capital-answers) lists them.
+Do not use this filter where a wrong answer has a cost.
 
 ## Add a semantic filter to candidate rows
 

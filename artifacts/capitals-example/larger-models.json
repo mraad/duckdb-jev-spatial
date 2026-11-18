@@ -1,0 +1,601 @@
+{
+ "question": "Is this city the capital of its country?",
+ "prompt": "City: {city}\nCountry: {country}\nIs this city the capital of its country? Answer with exactly one word: yes or no.",
+ "models": {
+  "Qwen3-8B Q4_K_M (llama-server, local)": {
+   "example_cities": {
+    "correct": 20,
+    "total": 20,
+    "wrong": [],
+    "answers": [
+     {
+      "city": "Paris",
+      "country": "France",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Lyon",
+      "country": "France",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Berlin",
+      "country": "Germany",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Munich",
+      "country": "Germany",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Tokyo",
+      "country": "Japan",
+      "expected": true,
+      "answer": true,
+      "raw": "Yes."
+     },
+     {
+      "city": "Osaka",
+      "country": "Japan",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Canberra",
+      "country": "Australia",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Sydney",
+      "country": "Australia",
+      "expected": false,
+      "answer": false,
+      "raw": "No."
+     },
+     {
+      "city": "Ottawa",
+      "country": "Canada",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Toronto",
+      "country": "Canada",
+      "expected": false,
+      "answer": false,
+      "raw": "No."
+     },
+     {
+      "city": "Ankara",
+      "country": "Turkey",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Istanbul",
+      "country": "Turkey",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Brasília",
+      "country": "Brazil",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Oslo",
+      "country": "Norway",
+      "expected": true,
+      "answer": true,
+      "raw": "Yes."
+     },
+     {
+      "city": "Bergen",
+      "country": "Norway",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Cairo",
+      "country": "Egypt",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Alexandria",
+      "country": "Egypt",
+      "expected": false,
+      "answer": false,
+      "raw": "No."
+     },
+     {
+      "city": "Nairobi",
+      "country": "Kenya",
+      "expected": true,
+      "answer": true,
+      "raw": "Yes."
+     },
+     {
+      "city": "Mombasa",
+      "country": "Kenya",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     }
+    ]
+   },
+   "other_cities": {
+    "correct": 18,
+    "total": 20,
+    "wrong": [
+     "Bern",
+     "Pretoria"
+    ],
+    "answers": [
+     {
+      "city": "Washington",
+      "country": "United States",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "New York",
+      "country": "United States",
+      "expected": false,
+      "answer": false,
+      "raw": "No."
+     },
+     {
+      "city": "New Delhi",
+      "country": "India",
+      "expected": true,
+      "answer": true,
+      "raw": "Yes"
+     },
+     {
+      "city": "Mumbai",
+      "country": "India",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Beijing",
+      "country": "China",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Shanghai",
+      "country": "China",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Bern",
+      "country": "Switzerland",
+      "expected": true,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Zurich",
+      "country": "Switzerland",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Abuja",
+      "country": "Nigeria",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Lagos",
+      "country": "Nigeria",
+      "expected": false,
+      "answer": false,
+      "raw": "No."
+     },
+     {
+      "city": "Pretoria",
+      "country": "South Africa",
+      "expected": true,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Johannesburg",
+      "country": "South Africa",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Wellington",
+      "country": "New Zealand",
+      "expected": true,
+      "answer": true,
+      "raw": "Yes."
+     },
+     {
+      "city": "Auckland",
+      "country": "New Zealand",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Hanoi",
+      "country": "Vietnam",
+      "expected": true,
+      "answer": true,
+      "raw": "Yes"
+     },
+     {
+      "city": "Ho Chi Minh City",
+      "country": "Vietnam",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Rabat",
+      "country": "Morocco",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Casablanca",
+      "country": "Morocco",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Islamabad",
+      "country": "Pakistan",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Karachi",
+      "country": "Pakistan",
+      "expected": false,
+      "answer": false,
+      "raw": "No."
+     }
+    ]
+   }
+  },
+  "gpt-5.6-sol-2026-07-09 (Azure OpenAI gateway)": {
+   "example_cities": {
+    "correct": 20,
+    "total": 20,
+    "wrong": [],
+    "answers": [
+     {
+      "city": "Paris",
+      "country": "France",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Lyon",
+      "country": "France",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Berlin",
+      "country": "Germany",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Munich",
+      "country": "Germany",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Tokyo",
+      "country": "Japan",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Osaka",
+      "country": "Japan",
+      "expected": false,
+      "answer": false,
+      "raw": "No"
+     },
+     {
+      "city": "Canberra",
+      "country": "Australia",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Sydney",
+      "country": "Australia",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Ottawa",
+      "country": "Canada",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Toronto",
+      "country": "Canada",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Ankara",
+      "country": "Turkey",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Istanbul",
+      "country": "Turkey",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Brasília",
+      "country": "Brazil",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Oslo",
+      "country": "Norway",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Bergen",
+      "country": "Norway",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Cairo",
+      "country": "Egypt",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Alexandria",
+      "country": "Egypt",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Nairobi",
+      "country": "Kenya",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Mombasa",
+      "country": "Kenya",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     }
+    ]
+   },
+   "other_cities": {
+    "correct": 20,
+    "total": 20,
+    "wrong": [],
+    "answers": [
+     {
+      "city": "Washington",
+      "country": "United States",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "New York",
+      "country": "United States",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "New Delhi",
+      "country": "India",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Mumbai",
+      "country": "India",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Beijing",
+      "country": "China",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Shanghai",
+      "country": "China",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Bern",
+      "country": "Switzerland",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Zurich",
+      "country": "Switzerland",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Abuja",
+      "country": "Nigeria",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Lagos",
+      "country": "Nigeria",
+      "expected": false,
+      "answer": false,
+      "raw": "No"
+     },
+     {
+      "city": "Pretoria",
+      "country": "South Africa",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Johannesburg",
+      "country": "South Africa",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Wellington",
+      "country": "New Zealand",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Auckland",
+      "country": "New Zealand",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Hanoi",
+      "country": "Vietnam",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Ho Chi Minh City",
+      "country": "Vietnam",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Rabat",
+      "country": "Morocco",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Casablanca",
+      "country": "Morocco",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     },
+     {
+      "city": "Islamabad",
+      "country": "Pakistan",
+      "expected": true,
+      "answer": true,
+      "raw": "yes"
+     },
+     {
+      "city": "Karachi",
+      "country": "Pakistan",
+      "expected": false,
+      "answer": false,
+      "raw": "no"
+     }
+    ]
+   }
+  }
+ }
+}
