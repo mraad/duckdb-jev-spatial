@@ -11,7 +11,7 @@ The [terms](../README.md#terms) in the README apply.
 | Typed query and compiler | Validate identifiers and operators. Bind literal values as SQL parameters. |
 | DuckDB | Evaluate attribute conditions and spatial relations. |
 | Laya | Evaluate explicit text questions with the local model. |
-| Native extension | Register Jev functions in DuckDB 1.5.6. Run Laya through a local ONNX Runtime library. |
+| Native extension | Register Jev functions in DuckDB 2.0.0. Run Laya through a local ONNX Runtime library. |
 | tev1 harness | Validate answer choices. Score the local SQL results and model answers. |
 
 ## Execution boundary
@@ -88,15 +88,17 @@ The sibling `duckdb-jev` checkout is not changed.
 
 ### Build and packaging
 
-The native extension uses the `duckdb` crate 1.10506.1.
+The native extension uses the `duckdb` crate 1.20000.2.
 It uses `laya-onnx` from `../laya/laya-rust` with the download feature disabled.
 The `ort` crate loads a local ONNX Runtime library through `ORT_DYLIB_PATH`.
 The build downloads no runtime binaries.
 
-The Rust bindings use the unstable DuckDB C extension API.
-Thus the file declares `C_STRUCT_UNSTABLE` and targets DuckDB 1.5.6 exactly.
-This choice agrees with the
-[official Rust extension template](https://github.com/duckdb/extension-template-rs/blob/main/Makefile).
+The Rust bindings use version 1 of the DuckDB C extension API and the entry point `jev_spatial_init_c_api`.
+DuckDB 2.0 marks all functions of that API as stable at C API version `v1.5.6`.
+Thus the file declares the `C_STRUCT` ABI with C API version `v1.5.6`.
+DuckDB 2.0 does not load a version 1 file that declares `C_STRUCT_UNSTABLE`.
+The extension is tested with DuckDB 2.0.0 only.
+The Rust source did not change for DuckDB 2.0.
 [scripts/build_extension.py](../scripts/build_extension.py) writes the metadata footer format of the
 [DuckDB extension tools](https://github.com/duckdb/extension-ci-tools/blob/main/scripts/append_extension_metadata.py).
 

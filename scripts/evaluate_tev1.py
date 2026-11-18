@@ -12,7 +12,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from jev_spatial import Catalog, compile_query, parse_question, register_jev
 from jev_spatial.engine import NativeRuntime, connect, execute, load_agent
-from smoke_northsea import QUESTION, sha256
+from smoke_northsea import QUESTION, baseline_rows, sha256
 
 
 def load_framework(root):
@@ -34,18 +34,7 @@ def record(identifier, source, group, state, question, choices, answer_key):
 
 def build_records(con):
     # Independent of parse_question/compile_query: exhaustive projected distance baseline.
-    ids = {r[0] for r in con.execute('''
-        WITH w AS MATERIALIZED (
-            SELECT OBJECTID, ST_Transform(geometry,'EPSG:4326','EPSG:3035',always_xy:=true) g
-            FROM Wells WHERE water_depth > 350 AND geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
-        ), p AS MATERIALIZED (
-            SELECT ST_Transform(geometry,'EPSG:4326','EPSG:3035',always_xy:=true) g
-            FROM Pipelines WHERE current_phase='IN SERVICE'
-                AND geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
-        )
-        SELECT w.OBJECTID FROM w CROSS JOIN p GROUP BY w.OBJECTID
-        HAVING min(ST_Distance(w.g,p.g)) <= 5000
-    ''').fetchall()}
+    ids = {r[0] for r in baseline_rows(con)}
     all_wells = con.execute('SELECT OBJECTID, water_depth FROM Wells ORDER BY OBJECTID').fetchall()
     # Balance positives with both deep/far and shallow negatives; selection precedes inference.
     deep = [oid for oid, depth in all_wells if oid not in ids and depth is not None and depth > 350]

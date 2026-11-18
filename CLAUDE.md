@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A loadable Rust DuckDB extension (`native/`) that registers Jev decision functions (`jev`, `jev_prob`, `jev_choice`, `jev_score`, `jev_score_norm`, `jev_eval`, `jev_confidence`, plus `jev_laya_load/stats/reset`) backed by local Laya ONNX inference, and an optional Python package (`jev_spatial/`) that compiles a fixed English grammar into parameterized spatial SQL over the NorthSea dataset. No hosted model, no credentials, no network at runtime. Not a git repo.
+A loadable Rust DuckDB extension (`native/`) that registers Jev decision functions (`jev`, `jev_prob`, `jev_choice`, `jev_score`, `jev_score_norm`, `jev_eval`, `jev_confidence`, plus `jev_laya_load/stats/reset`) backed by local Laya ONNX inference, and an optional Python package (`jev_spatial/`) that compiles a fixed English grammar into parameterized spatial SQL over the NorthSea dataset. No hosted model, no credentials, no network at runtime.
 
-Hard pins: DuckDB **1.5.6 exactly** (unstable C extension API, `C_STRUCT_UNSTABLE` footer), macOS arm64, `.venv` on Python 3.12. Sibling checkouts: `../laya` (path dependency for Python `laya` and Rust `laya-onnx`) and `../tev1` (evaluation harness).
+Hard pins: DuckDB **2.0.0 exactly** (V1 C extension API, footer `C_STRUCT` with C API `v1.5.6`; the build script rejects other DuckDB versions), macOS arm64, `.venv` on Python 3.12. Sibling checkouts: `../laya` (path dependency for Python `laya` and Rust `laya-onnx`) and `../tev1` (evaluation harness).
 
 Dataset: `data/NorthSea.tar.gz` holds the NorthSea sample data from Geodata (https://www.geodata.no/): `NorthSea.ddb`, `NorthSea.ossie.yaml`, `NorthSea.ontology.yaml`, `knowledge/datasets/{Wells,Pipelines}.md`, byte-identical to `~/Documents/ArcGIS/Projects/NorthSea` (database SHA-256 `37262552…`). Extract with `tar -xzf data/NorthSea.tar.gz -C data`; `.gitignore` tracks only `data/NorthSea.tar.gz` inside `data/`. SQL examples need only the database; the planner, smoke test and tev1 read the metadata beside it, so keep all five files together. Always open it read-only and never modify it or its metadata.
 

@@ -1,4 +1,4 @@
--- Run from the project root with DuckDB 1.5.6 and ORT_DYLIB_PATH set.
+-- Run from the project root with DuckDB 2.0.0 and ORT_DYLIB_PATH set.
 -- duckdb -readonly -unsigned /path/to/NorthSea.ddb < native/northsea.sql
 LOAD 'native/dist/jev_spatial.duckdb_extension';
 SELECT jev_laya_load('models/laya-onnx/laya');

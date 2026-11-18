@@ -23,6 +23,25 @@ def sha256(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
+def baseline_rows(con):
+    """(OBJECTID, nearest_m) of deep wells within 5 km of an in-service pipeline."""
+    # Different relational plan and distance predicate; do not call the compiler here.
+    return con.execute('''
+        WITH w AS MATERIALIZED (
+            SELECT OBJECTID,
+                ST_Transform(geometry, 'EPSG:4326', 'EPSG:3035', always_xy:=true) g
+            FROM Wells WHERE water_depth > 350 AND geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
+        ), p AS MATERIALIZED (
+            SELECT ST_Transform(geometry, 'EPSG:4326', 'EPSG:3035', always_xy:=true) g
+            FROM Pipelines WHERE current_phase='IN SERVICE'
+                AND geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
+        )
+        SELECT w.OBJECTID, min(ST_Distance(w.g,p.g)) nearest_m
+        FROM w CROSS JOIN p
+        GROUP BY w.OBJECTID HAVING nearest_m <= 5000 ORDER BY w.OBJECTID
+    ''').fetchall()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--database', type=Path, required=True)
@@ -54,21 +73,7 @@ def main():
         rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
         report['exact_seconds'] = time.perf_counter() - start
         actual = {row['OBJECTID'] for row in rows}
-        # Different relational plan and distance predicate; do not call the compiler here.
-        baseline = con.execute('''
-            WITH w AS MATERIALIZED (
-                SELECT OBJECTID, water_depth,
-                    ST_Transform(geometry, 'EPSG:4326', 'EPSG:3035', always_xy:=true) g
-                FROM Wells WHERE geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
-            ), p AS MATERIALIZED (
-                SELECT ST_Transform(geometry, 'EPSG:4326', 'EPSG:3035', always_xy:=true) g
-                FROM Pipelines WHERE current_phase='IN SERVICE'
-                    AND geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
-            )
-            SELECT w.OBJECTID, min(ST_Distance(w.g,p.g)) nearest_m
-            FROM w CROSS JOIN p WHERE w.water_depth > 350
-            GROUP BY w.OBJECTID HAVING nearest_m <= 5000 ORDER BY w.OBJECTID
-        ''').fetchall()
+        baseline = baseline_rows(con)
         expected = {row[0] for row in baseline}
         assert actual == expected, f'ID mismatch: {actual ^ expected}'
         assert len(actual) == len(rows), 'Duplicate wells from spatial relation'

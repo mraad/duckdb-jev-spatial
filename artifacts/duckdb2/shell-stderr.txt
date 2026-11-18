@@ -1,0 +1,12 @@
+## spatial-jev-examples.sql
+[90m-- Loading resources from ~/.duckdbrc
+[00mexit 0
+## spatial-examples.sql
+[90m-- Loading resources from ~/.duckdbrc
+[00mexit 0
+## northsea.sql
+[90m-- Loading resources from ~/.duckdbrc
+[00mexit 0
+## capitals-example.sql
+[90m-- Loading resources from ~/.duckdbrc
+[00mexit 0

@@ -41,8 +41,8 @@ class JevRuntime:
             if not question.strip():
                 raise ValueError("Jev question must not be blank")
             if labels is not None:
-                if not 2 <= len(labels) <= 255 or any(not isinstance(x, str) or not x.strip() for x in labels) or len(set(labels)) != len(labels):
-                    raise ValueError("Supply 2–255 distinct, nonempty option labels")
+                if not labels or any(not isinstance(x, str) or not x.strip() for x in labels) or len(set(labels)) != len(labels):
+                    raise ValueError("Supply distinct, nonempty option labels")
                 labels = tuple(labels)
             parsed = json.loads(state)
             state = json.dumps(parsed, sort_keys=True, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
@@ -71,9 +71,7 @@ class JevRuntime:
                         raise ValueError("Laya truncated evidence or collapsed options; shorten the input")
                     answer = result["answers"]["answer"]
                     value = answer[primitive]
-                    if answer.get("abstained"):
-                        value = None
-                    elif primitive == "choice":
+                    if primitive == "choice":
                         if value not in labels:
                             raise ValueError("Laya returned a choice outside the supplied options")
                     elif not isinstance(value, (int, float)) or not math.isfinite(value) or not 0 <= value <= (1 if primitive == "noul" else len(labels) - 1):

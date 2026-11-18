@@ -1,4 +1,4 @@
--- Run from the project root in a fresh DuckDB 1.5.6 session.
+-- Run from the project root in a fresh DuckDB 2.0.0 session.
 -- duckdb -readonly -unsigned /path/to/NorthSea.ddb < native/spatial-examples.sql
 -- These exact spatial queries do not load a Laya model.
 LOAD 'native/dist/jev_spatial.duckdb_extension';

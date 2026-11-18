@@ -8,7 +8,7 @@ publish = false
 crate-type = ["cdylib"]
 
 [dependencies]
-duckdb = { version = "=1.10506.1", features = ["loadable-extension", "vscalar"] }
+duckdb = { version = "=1.20000.2", features = ["loadable-extension", "vscalar"] }
 laya = { package = "laya-onnx", path = "../../laya/laya-rust", default-features = false }
 # Load an explicitly installed runtime. No runtime binaries are downloaded during the build.
 ort = { version = "=2.0.0-rc.13", features = ["load-dynamic"] }

@@ -33,11 +33,16 @@ def test_budget_prevents_inference(con, agent):
     assert runtime.evaluations == 0 and agent.calls == 0
 
 
-@pytest.mark.parametrize('options', ["[]", "['one']", "['one','one']", "['one',NULL]", "['one','']"])
+@pytest.mark.parametrize('options', ["[]", "['one','one']", "['one',NULL]", "['one','']"])
 def test_invalid_options(con, agent, options):
     register_jev(con, agent)
     with pytest.raises(duckdb.InvalidInputException, match='option labels'):
         con.execute(f"SELECT jev_choice('text','pick',{options})").fetchall()
+
+
+def test_single_option_matches_native_rule(con, agent):
+    register_jev(con, agent)
+    assert con.execute("SELECT jev_choice({'status':'operating'},'pick',['one'])").fetchone() == ('one',)
 
 
 def test_truncation_is_error(con, agent):

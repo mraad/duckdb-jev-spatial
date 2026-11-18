@@ -103,3 +103,15 @@ def test_contract_drift_is_rejected(catalog_project, change, message):
     path.write_text(yaml.safe_dump(model))
     with pytest.raises(ValueError, match=message):
         Catalog(catalog_project)
+
+
+@pytest.mark.parametrize('content', ['datasets: []\nai_context: {instructions: EPSG:3035}\n', 'a: [unclosed\n', 'null\n', ''])
+def test_cli_reports_bad_metadata_without_traceback(catalog_project, monkeypatch, capsys, content):
+    from jev_spatial import cli
+    (catalog_project / 'NorthSea.ossie.yaml').write_text(content)
+    monkeypatch.setattr('sys.argv', ['jev-spatial', 'Show all wells with depth > 350 meters',
+                                     '--database', str(catalog_project / 'x.ddb')])
+    with pytest.raises(SystemExit):
+        cli.main()
+    err = capsys.readouterr().err
+    assert 'error:' in err and 'Traceback' not in err

@@ -1,0 +1,464 @@
+{
+ "checked_at": "2026-11-18",
+ "sql_sha256": "3875453f5a2c5064424117ea3d628ac0f6996595049fc7e88c02b2c17b90e85b",
+ "extension_sha256": "fc1831d2e5336a700877bc06f8bba99b407fb102ee6cff80cb0035352cbf1ed4",
+ "model_weights_sha256": "afcc11e72b59193fbec6e5dc8b693c9baa81cf66bec53279cefd687b318c3199",
+ "duckdb": "2.0.0",
+ "backend": "local Rust Laya and DuckDB spatial (Python duckdb client and duckdb 2.0.0 shell)",
+ "scope": "capitals-example.sql run in memory; ground truth held outside the SQL; rewording study on the 20 example cities and 20 other cities",
+ "examples": {
+  "jev_capital_probability": [
+   [
+    "Canberra",
+    "Australia",
+    "0.207"
+   ],
+   [
+    "Sydney",
+    "Australia",
+    "0.118"
+   ],
+   [
+    "Brasília",
+    "Brazil",
+    "0.692"
+   ],
+   [
+    "Rio de Janeiro",
+    "Brazil",
+    "0.801"
+   ],
+   [
+    "Ottawa",
+    "Canada",
+    "0.42"
+   ],
+   [
+    "Toronto",
+    "Canada",
+    "0.102"
+   ],
+   [
+    "Alexandria",
+    "Egypt",
+    "0.351"
+   ],
+   [
+    "Cairo",
+    "Egypt",
+    "0.749"
+   ],
+   [
+    "Lyon",
+    "France",
+    "0.122"
+   ],
+   [
+    "Paris",
+    "France",
+    "0.77"
+   ],
+   [
+    "Berlin",
+    "Germany",
+    "0.647"
+   ],
+   [
+    "Munich",
+    "Germany",
+    "0.089"
+   ],
+   [
+    "Osaka",
+    "Japan",
+    "0.131"
+   ],
+   [
+    "Tokyo",
+    "Japan",
+    "0.532"
+   ],
+   [
+    "Mombasa",
+    "Kenya",
+    "0.148"
+   ],
+   [
+    "Nairobi",
+    "Kenya",
+    "0.557"
+   ],
+   [
+    "Bergen",
+    "Norway",
+    "0.074"
+   ],
+   [
+    "Oslo",
+    "Norway",
+    "0.439"
+   ],
+   [
+    "Ankara",
+    "Turkey",
+    "0.132"
+   ],
+   [
+    "Istanbul",
+    "Turkey",
+    "0.805"
+   ]
+  ],
+  "jev_capitals": [
+   [
+    "Brasília",
+    "Brazil",
+    "POINT (-47.8825 -15.7942)"
+   ],
+   [
+    "Rio de Janeiro",
+    "Brazil",
+    "POINT (-43.1729 -22.9068)"
+   ],
+   [
+    "Cairo",
+    "Egypt",
+    "POINT (31.2357 30.0444)"
+   ],
+   [
+    "Paris",
+    "France",
+    "POINT (2.3522 48.8566)"
+   ],
+   [
+    "Berlin",
+    "Germany",
+    "POINT (13.405 52.52)"
+   ],
+   [
+    "Tokyo",
+    "Japan",
+    "POINT (139.6917 35.6895)"
+   ],
+   [
+    "Nairobi",
+    "Kenya",
+    "POINT (36.8219 -1.2921)"
+   ],
+   [
+    "Istanbul",
+    "Turkey",
+    "POINT (28.9784 41.0082)"
+   ]
+  ],
+  "jev_capitals_within_1500_km_of_paris": [
+   [
+    "Paris",
+    "France",
+    "0.0"
+   ],
+   [
+    "Berlin",
+    "Germany",
+    "877.0"
+   ]
+  ],
+  "jev_top_city_per_country": [
+   [
+    "Canberra",
+    "Australia",
+    "0.374"
+   ],
+   [
+    "Brasília",
+    "Brazil",
+    "0.854"
+   ],
+   [
+    "Ottawa",
+    "Canada",
+    "0.256"
+   ],
+   [
+    "Cairo",
+    "Egypt",
+    "0.838"
+   ],
+   [
+    "Paris",
+    "France",
+    "0.629"
+   ],
+   [
+    "Berlin",
+    "Germany",
+    "0.829"
+   ],
+   [
+    "Tokyo",
+    "Japan",
+    "0.593"
+   ],
+   [
+    "Nairobi",
+    "Kenya",
+    "0.825"
+   ],
+   [
+    "Oslo",
+    "Norway",
+    "0.856"
+   ],
+   [
+    "Istanbul",
+    "Turkey",
+    "0.92"
+   ]
+  ]
+ },
+ "ground_truth_capitals": [
+  "Ankara",
+  "Berlin",
+  "Brasília",
+  "Cairo",
+  "Canberra",
+  "Nairobi",
+  "Oslo",
+  "Ottawa",
+  "Paris",
+  "Tokyo"
+ ],
+ "false_positives": [
+  "Istanbul",
+  "Rio de Janeiro"
+ ],
+ "false_negatives": [
+  "Ankara",
+  "Canberra",
+  "Oslo",
+  "Ottawa"
+ ],
+ "correct_rows": 14,
+ "total_rows": 20,
+ "top_city_per_country": {
+  "correct_countries": 9,
+  "total_countries": 10,
+  "wrong": [
+   "Istanbul"
+  ]
+ },
+ "runtime": {
+  "evaluations": 40,
+  "cache_hits": 40,
+  "errors": 0
+ },
+ "rewording_study": {
+  "note": "The wording of the fourth example was selected on the example cities. The other-city set is the check. It contains 10 countries whose largest city is not the capital.",
+  "yes_no_questions": [
+   {
+    "prompt": "Is this city the capital of its country?",
+    "dev_threshold": 14,
+    "dev_argmax_countries": 8,
+    "held_threshold": 14,
+    "held_argmax_countries": 8
+   },
+   {
+    "prompt": "Is this city the capital city of the country?",
+    "dev_threshold": 10,
+    "dev_argmax_countries": 9,
+    "held_threshold": 12,
+    "held_argmax_countries": 6
+   },
+   {
+    "prompt": "Is this city the official capital of this country, where the national government has its seat?",
+    "dev_threshold": 13,
+    "dev_argmax_countries": 9,
+    "held_threshold": 17,
+    "held_argmax_countries": 9
+   },
+   {
+    "prompt": "Is the seat of the national government of this country in this city?",
+    "dev_threshold": 12,
+    "dev_argmax_countries": 8,
+    "held_threshold": 10,
+    "held_argmax_countries": 5
+   },
+   {
+    "prompt": "Is the national government of the country located in this city?",
+    "dev_threshold": 10,
+    "dev_argmax_countries": 6,
+    "held_threshold": 10,
+    "held_argmax_countries": 6
+   },
+   {
+    "prompt": "Is this city the political capital of the country? The largest city is not always the capital.",
+    "dev_threshold": 12,
+    "dev_argmax_countries": 7,
+    "held_threshold": 8,
+    "held_argmax_countries": 4
+   },
+   {
+    "prompt": "Does the national parliament of this country meet in this city?",
+    "dev_threshold": 11,
+    "dev_argmax_countries": 7,
+    "held_threshold": 11,
+    "held_argmax_countries": 7
+   },
+   {
+    "prompt": "Is this the capital?",
+    "dev_threshold": 11,
+    "dev_argmax_countries": 7,
+    "held_threshold": 14,
+    "held_argmax_countries": 9
+   },
+   {
+    "prompt": "Is {city} the capital of {country}?",
+    "dev_threshold": 13,
+    "dev_argmax_countries": 6,
+    "held_threshold": 14,
+    "held_argmax_countries": 9
+   },
+   {
+    "prompt": "Is the capital of this country this city, and not another city?",
+    "dev_threshold": 14,
+    "dev_argmax_countries": 9,
+    "held_threshold": 16,
+    "held_argmax_countries": 9
+   }
+  ],
+  "choice_questions": {
+   "Which city is the capital of this country?|dev|capital first": {
+    "correct": 10,
+    "wrong": []
+   },
+   "Which city is the capital of this country?|dev|capital second": {
+    "correct": 5,
+    "wrong": [
+     "Canada",
+     "Turkey",
+     "Brazil",
+     "Norway",
+     "Kenya"
+    ]
+   },
+   "Which city is the capital of this country?|dev|alphabetical": {
+    "correct": 8,
+    "wrong": [
+     "Norway",
+     "Kenya"
+    ]
+   },
+   "Which city is the capital of this country?|held|capital first": {
+    "correct": 10,
+    "wrong": []
+   },
+   "Which city is the capital of this country?|held|capital second": {
+    "correct": 5,
+    "wrong": [
+     "United States",
+     "Switzerland",
+     "Nigeria",
+     "South Africa",
+     "Vietnam"
+    ]
+   },
+   "Which city is the capital of this country?|held|alphabetical": {
+    "correct": 8,
+    "wrong": [
+     "United States",
+     "South Africa"
+    ]
+   },
+   "What is the capital city of this country?|dev|capital first": {
+    "correct": 10,
+    "wrong": []
+   },
+   "What is the capital city of this country?|dev|capital second": {
+    "correct": 5,
+    "wrong": [
+     "Australia",
+     "Canada",
+     "Turkey",
+     "Brazil",
+     "Kenya"
+    ]
+   },
+   "What is the capital city of this country?|dev|alphabetical": {
+    "correct": 9,
+    "wrong": [
+     "Kenya"
+    ]
+   },
+   "What is the capital city of this country?|held|capital first": {
+    "correct": 9,
+    "wrong": [
+     "Nigeria"
+    ]
+   },
+   "What is the capital city of this country?|held|capital second": {
+    "correct": 3,
+    "wrong": [
+     "United States",
+     "China",
+     "Switzerland",
+     "Nigeria",
+     "South Africa",
+     "New Zealand",
+     "Vietnam"
+    ]
+   },
+   "What is the capital city of this country?|held|alphabetical": {
+    "correct": 6,
+    "wrong": [
+     "United States",
+     "Nigeria",
+     "South Africa",
+     "New Zealand"
+    ]
+   }
+  },
+  "raw": [
+   "artifacts/capitals-example/rewording-noul.json",
+   "artifacts/capitals-example/rewording-choice.json"
+  ]
+ },
+ "not_run": "pytest/cargo are recorded in artifacts/duckdb2-validation.json",
+ "examples_equal_to_duckdb_1_5_6_record": true,
+ "shell_output": "artifacts/duckdb2/capitals-shell.txt",
+ "larger_models": {
+  "prompt": "City: {city}\nCountry: {country}\nIs this city the capital of its country? Answer with exactly one word: yes or no.",
+  "results": {
+   "Qwen3-8B Q4_K_M (llama-server, local)": {
+    "example_cities": {
+     "correct": 20,
+     "total": 20,
+     "wrong": []
+    },
+    "other_cities": {
+     "correct": 18,
+     "total": 20,
+     "wrong": [
+      "Bern",
+      "Pretoria"
+     ]
+    }
+   },
+   "gpt-5.6-sol-2026-07-09 (Azure OpenAI gateway)": {
+    "example_cities": {
+     "correct": 20,
+     "total": 20,
+     "wrong": []
+    },
+    "other_cities": {
+     "correct": 20,
+     "total": 20,
+     "wrong": []
+    }
+   }
+  },
+  "llama_server": "1.0.0 (build 12359)",
+  "raw": "artifacts/capitals-example/larger-models.json",
+  "not_run": "Claude (claude-opus-5-5): no ANTHROPIC_API_KEY in the shell; scripts/try_larger_models.py --claude is untested",
+  "azure": "gpt-5.6-sol-2026-07-09 through the IST AzureAI API Gateway (DEV), v1 URL shape; city and country names left this computer"
+ }
+}
