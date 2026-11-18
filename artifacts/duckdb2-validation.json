@@ -1,0 +1,118 @@
+{
+ "checked_at": "2026-11-18",
+ "change": "DuckDB 1.5.6 to 2.0.0",
+ "versions": {
+  "duckdb_python": "2.0.0",
+  "duckdb_shell": "v2.0.0",
+  "duckdb_crate": "1.20000.2",
+  "laya_python": "0.4.13 (path dependency ../laya; uv lock moved it from 0.4.12)",
+  "python": "3.12"
+ },
+ "source_changes": [
+  "pyproject.toml: duckdb==2.0.0",
+  "uv.lock",
+  "native/Cargo.toml: duckdb =1.20000.2",
+  "native/Cargo.lock",
+  "scripts/build_extension.py: version check 2.0.0; footer C_STRUCT with C API v1.5.6 (was C_STRUCT_UNSTABLE); PRAGMA platform read through a connection",
+  "native/capitals-example.sql: SET geometry_always_xy = true; ST_FlipCoordinates removed",
+  "native/src/lib.rs: no change"
+ ],
+ "pytest": {
+  "passed": 95,
+  "skipped": 0,
+  "log": "artifacts/duckdb2/pytest.txt"
+ },
+ "rust": {
+  "tests_passed": 4,
+  "clippy": "passed with -D warnings",
+  "rustfmt": "passed",
+  "logs": [
+   "artifacts/duckdb2/cargo-test.txt",
+   "artifacts/duckdb2/clippy.txt",
+   "artifacts/duckdb2/fmt.txt"
+  ]
+ },
+ "northsea_smoke": {
+  "result_count": 106,
+  "ids_equal_to_1_5_6": true,
+  "status_probe_equal": true,
+  "hybrid_equal": true,
+  "record": "artifacts/duckdb2/northsea-smoke.json"
+ },
+ "mixed_examples": {
+  "counts": [
+   106,
+   52,
+   4,
+   600
+  ],
+  "rows_equal_to_1_5_6": true,
+  "false_positives_equal": true,
+  "record": "artifacts/duckdb2/spatial-jev.json"
+ },
+ "shell": {
+  "mixed_examples": "4 result sets equal to artifacts/spatial-jev-cleanup-shell.json; the jev_laya_load line differs (absolute path; clamped temperature prints ...929, was ...928)",
+  "exact_examples_counts": [
+   106,
+   494,
+   4426,
+   52,
+   1375,
+   4873,
+   72,
+   600
+  ],
+  "exact_counts_equal_to_1_5_6": true,
+  "northsea_sql": "ran, exit 0; output not compared",
+  "capitals": "ran, exit 0",
+  "records": [
+   "artifacts/duckdb2/capitals-shell.json",
+   "artifacts/duckdb2/northsea-shell.json",
+   "artifacts/duckdb2/spatial-examples-shell.json",
+   "artifacts/duckdb2/spatial-jev-shell.json"
+  ]
+ },
+ "tev1": {
+  "requests": 256,
+  "valid": 256,
+  "correct": 250,
+  "laya_unique_evaluations": 25,
+  "sql_full_result_count": 106,
+  "records_sha256": "488ac5dad8f722324a376dbafc004782a8256ba555e36ba397fd2b02ad790c7e",
+  "database_unchanged": true,
+  "predictions_and_probabilities_equal_to_1_5_6": true,
+  "record": "artifacts/duckdb2/tev1/report.json"
+ },
+ "sha256": {
+  "native/dist/jev_spatial.duckdb_extension": "fc1831d2e5336a700877bc06f8bba99b407fb102ee6cff80cb0035352cbf1ed4",
+  "native/src/lib.rs": "47a7e1dfd5ac27f8419a826a638d22e6c637702454cedd0130807d17ea71349f",
+  "scripts/build_extension.py": "dceb3007c3b667dd5e567955021cc1671d78acc9dbb3bb3c4c637d3e94266e89",
+  "native/Cargo.lock": "dcb4477ab873a1b69e5e70eedecd2263596dd3d1a96f60f4d242d8333fc44266",
+  "uv.lock": "4d4588a305969f7ff0b2ef0639926b16f6674be28bc7f5e0c72687850c31dd5f",
+  "data/NorthSea/NorthSea.ddb": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+  "models/laya-onnx/laya/model.onnx.data": "afcc11e72b59193fbec6e5dc8b693c9baa81cf66bec53279cefd687b318c3199"
+ },
+ "backup": "backups/before-duckdb2-20261118T120101Z",
+ "not_run": [
+  "Python backend with the PyTorch checkpoint",
+  "release build (--release)",
+  "DuckDB 2.0.1 or 2.1 development versions",
+  "loading this extension in DuckDB 1.5.6"
+ ],
+ "benchmark": {
+  "median_seconds": {
+   "probability_struct": 0.2953,
+   "choice_struct": 0.42,
+   "raw_score_json": 0.6664
+  },
+  "duckdb_1_5_6_median_seconds": {
+   "probability_struct": 0.217,
+   "choice_struct": 0.3086,
+   "raw_score_json": 0.4873
+  },
+  "answer_hashes_equal_to_1_5_6": true,
+  "note": "About 36% slower on cache hits; repeated once with the same result; cause not examined",
+  "record": "artifacts/duckdb2/benchmark.json"
+ },
+ "docs_image": "docs/images/architecture.png redrawn with rsvg-convert to say DuckDB 2.0.0"
+}

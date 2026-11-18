@@ -7,7 +7,7 @@ name = "duckdb-jev-spatial"
 version = "0.1.0"
 description = "Ontology-grounded spatial WHERE clauses and local Laya predicates for DuckDB"
 requires-python = ">=3.11"
-dependencies = ["duckdb==1.5.6", "PyYAML>=6", "pyarrow>=18", "pytz", "laya>=0.4.12"]
+dependencies = ["duckdb==2.0.0", "PyYAML>=6", "pyarrow>=18", "pytz", "laya>=0.4.12"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]

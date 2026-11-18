@@ -1,4 +1,4 @@
--- Run from the project root in a fresh DuckDB 1.5.6 session.
+-- Run from the project root in a fresh DuckDB 2.0.0 session.
 -- Set ORT_DYLIB_PATH to the local ONNX Runtime library before starting DuckDB.
 -- duckdb -readonly -unsigned /path/to/NorthSea.ddb < native/spatial-jev-examples.sql
 LOAD 'native/dist/jev_spatial.duckdb_extension';
