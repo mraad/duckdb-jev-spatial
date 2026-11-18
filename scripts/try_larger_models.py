@@ -6,6 +6,7 @@ Claude run: `uv run --with anthropic scripts/try_larger_models.py --claude ...` 
 Azure run: `--azure` uses AZURE_API_BASE, AZURE_API_KEY and AZURE_API_DEPLOYMENT (v1 URL shape, `api-key` header).
 """
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -17,10 +18,10 @@ PROMPT = 'City: {city}\nCountry: {country}\n' + QUESTION + ' Answer with exactly
 
 
 def parse(text):
-    words = re.findall(r'[a-z]+', re.sub(r'<think>.*?</think>', '', text, flags=re.S).lower())
-    if not words or words[0] not in ('yes', 'no'):
+    answer = re.sub(r'<think>.*?</think>', '', text, flags=re.S).strip().rstrip('.!').lower()
+    if answer not in ('yes', 'no'):
         raise ValueError(f'Unexpected answer: {text!r}')
-    return words[0] == 'yes'
+    return answer == 'yes'
 
 
 def ask_local(url, city, country):
@@ -33,6 +34,8 @@ def ask_local(url, city, country):
 
 
 def ask_azure(base, key, deployment, city, country):
+    if not base.startswith('https://'):
+        raise ValueError('AZURE_API_BASE must use https; the request carries the API key')
     body = {'model': deployment, 'messages': [{'role': 'user', 'content': PROMPT.format(city=city, country=country)}]}
     request = urllib.request.Request(base.rstrip('/') + '/openai/v1/chat/completions', json.dumps(body).encode(),
                                      {'Content-Type': 'application/json', 'api-key': key})
@@ -69,24 +72,32 @@ def main():
     parser.add_argument('--merge', action='store_true', help='Keep the models already in the output file')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    if not (args.local_url or args.azure or args.claude):
+        parser.error('Select at least one of --local-url, --azure, --claude')
+    cities_sha256 = hashlib.sha256(args.cities.read_bytes()).hexdigest()
     cities = json.loads(args.cities.read_text())
     sets = {'example_cities': cities['dev'], 'other_cities': cities['held']}
-    report = {'question': QUESTION, 'prompt': PROMPT, 'models': {}}
+    report = {'question': QUESTION, 'prompt': PROMPT, 'cities_sha256': cities_sha256, 'models': {}}
     if args.merge and args.output.is_file():
-        report['models'] = json.loads(args.output.read_text())['models']
+        previous = json.loads(args.output.read_text())
+        if previous.get('cities_sha256', cities_sha256) != cities_sha256:
+            parser.error('--merge needs the same --cities file as the existing report')
+        report['models'] = previous['models']
+
+    def run(name, ask):
+        # Write after each model, so a later failure keeps the finished results.
+        report['models'][name] = {split: score(rows, ask) for split, rows in sets.items()}
+        args.output.write_text(json.dumps(report, indent=1, ensure_ascii=False) + '\n')
+
     if args.azure:
         base, key, deployment = (os.environ[k] for k in ('AZURE_API_BASE', 'AZURE_API_KEY', 'AZURE_API_DEPLOYMENT'))
-        report['models'][deployment + ' (Azure OpenAI gateway)'] = {
-            name: score(rows, lambda c, k: ask_azure(base, key, deployment, c, k)) for name, rows in sets.items()}
+        run(deployment + ' (Azure OpenAI gateway)', lambda c, k: ask_azure(base, key, deployment, c, k))
     if args.local_url:
-        report['models'][args.local_name] = {
-            name: score(rows, lambda c, k: ask_local(args.local_url, c, k)) for name, rows in sets.items()}
+        run(args.local_name, lambda c, k: ask_local(args.local_url, c, k))
     if args.claude:
         import anthropic
         client = anthropic.Anthropic()
-        report['models'][args.claude] = {
-            name: score(rows, lambda c, k: ask_claude(client, args.claude, c, k)) for name, rows in sets.items()}
-    args.output.write_text(json.dumps(report, indent=1, ensure_ascii=False) + '\n')
+        run(args.claude, lambda c, k: ask_claude(client, args.claude, c, k))
     for model, result in report['models'].items():
         for name, r in result.items():
             print(f"{model} | {name}: {r['correct']}/{r['total']} wrong={r['wrong']}")

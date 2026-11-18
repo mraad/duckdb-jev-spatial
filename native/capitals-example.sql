@@ -64,6 +64,7 @@ ORDER BY meters, city;
 
 -- example: jev_top_city_per_country
 -- Rank the cities of each country by probability. Keep the highest one.
+-- The city name breaks an equal-probability tie.
 -- This query needs no threshold. It assumes that the table has the capital of each country.
 -- The question has a different wording. Refer to docs/validation.md#capital-answers.
 SELECT city, country, round(p_capital, 3) AS p_capital
@@ -73,5 +74,5 @@ FROM (
                   'Is the capital of this country this city, and not another city?') AS p_capital
   FROM cities
 )
-QUALIFY p_capital = max(p_capital) OVER (PARTITION BY country)
+QUALIFY row_number() OVER (PARTITION BY country ORDER BY p_capital DESC, city) = 1
 ORDER BY country, city;

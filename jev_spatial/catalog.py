@@ -38,6 +38,8 @@ class Catalog:
         texts = [data.decode("utf-8") for data in contents]
         self.sources = {str(p): hashlib.sha256(data).hexdigest() for p, data in zip(paths, contents)}
         ossie, ontology = [yaml.safe_load(t) for t in texts[:2]]
+        if not isinstance(ossie, dict) or not isinstance(ontology, dict):
+            raise ValueError("Ossie and ontology files must each contain a YAML mapping")
         self.tables = {t["name"]: t for t in ossie["datasets"]}
         self.fields = {name: {f["name"]: f for f in t["fields"]} for name, t in self.tables.items()}
         self.relations = {r["name"] for c in ontology["ontology"] if c["concept"] == "Feature"

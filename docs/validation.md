@@ -12,14 +12,14 @@ All NorthSea results are equal to the DuckDB 1.5.6 results.
 
 | Check | Result | Record |
 |---|---|---|
-| Python tests, with native model checks | 95 passed; 0 skipped | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
+| Python tests, with native model checks | 97 passed; 0 skipped | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
 | Native Rust unit tests | 4 passed | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
 | Clippy with warnings denied | Passed | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
 | rustfmt check | Passed | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
 | NorthSea smoke test | 106 IDs; equal to the independent baseline | [northsea-smoke.json](../artifacts/duckdb2/northsea-smoke.json) |
 | Exact spatial examples in the DuckDB shell | 8 executed; counts unchanged | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
 | Mixed spatial and semantic examples | 106, 52, 4, and 600 rows; 3 false positives | [spatial-jev.json](../artifacts/duckdb2/spatial-jev.json) |
-| Mixed examples in the DuckDB shell, with no Python process | Result sets equal to the previous run | [spatial-jev-shell.json](../artifacts/duckdb2/spatial-jev-shell.json) |
+| Mixed examples in the DuckDB shell, with no Python process | Result sets equal to the previous run | [spatial-jev-shell.txt](../artifacts/duckdb2/spatial-jev-shell.txt) |
 | Capital selection example, Laya | Threshold: 14/20 rows correct. Top city for each country: 9/10 correct | [capitals-example-validation.json](../artifacts/capitals-example-validation.json) |
 | Capital question, larger models | Local Qwen3-8B: 20/20 and 18/20. gpt-5.6-sol through the Azure gateway: 20/20 and 20/20 | [larger-models.json](../artifacts/capitals-example/larger-models.json) |
 | Cache benchmark, 30,000 rows from the cache | 0.295 s, 0.420 s, and 0.666 s; answers unchanged; about 36% slower than on DuckDB 1.5.6 | [benchmark.json](../artifacts/duckdb2/benchmark.json) |
@@ -153,7 +153,7 @@ The gateway DEV tier is for research and development only.
 Qwen3-8B answers "no" for Bern and Pretoria. gpt-5.6-sol answers "yes" for both.
 Switzerland has no capital in law, and South Africa has three capitals. Thus these two answers are not clear errors.
 The Claude run did not start, because the shell has no `ANTHROPIC_API_KEY`. The `--claude` option of the script is not tested.
-The duckdb shell was not run, because the shell on `PATH` is version 2.0.0.
+The DuckDB 2.0.0 shell also ran the SQL file. See [capitals-shell.txt](../artifacts/duckdb2/capitals-shell.txt).
 
 ## Run the checks
 
@@ -406,7 +406,7 @@ They do not change the database or the NorthSea metadata.
 | 2026-10-20 | Documentation consolidation | Not run | Not run | 10 files merged into 5; no broken links | [readme-consolidation-validation.json](../artifacts/readme-consolidation-validation.json) |
 | 2026-10-20 | Local sample dataset archive | Not run | Not run | Archive files equal to the source; examples unchanged | [local-data-validation.json](../artifacts/local-data-validation.json) |
 | 2026-11-18 | Capital selection example, with a rewording study | Not run | Not run | Threshold 14/20 rows; top city 9/10 countries; no source change | [capitals-example-validation.json](../artifacts/capitals-example-validation.json) |
-| 2026-11-18 | DuckDB 2.0.0 and a larger-model trial | 95 | 4 | All NorthSea results equal to DuckDB 1.5.6; Qwen3-8B 20/20 and 18/20, gpt-5.6-sol 20/20 and 20/20 on the capital question | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
+| 2026-11-18 | DuckDB 2.0.0 and a larger-model trial | 97 | 4 | All NorthSea results equal to DuckDB 1.5.6; Qwen3-8B 20/20 and 18/20, gpt-5.6-sol 20/20 and 20/20 on the capital question | [duckdb2-validation.json](../artifacts/duckdb2-validation.json) |
 | 2026-11-18 | Audit fixes: option rule, abstain branch, shared baseline query, CLI metadata errors | 95 | Not run | 106 IDs; tev1 256 valid, 250 correct; tev1 records unchanged | [audit-fixes-validation.json](../artifacts/audit-fixes-validation.json) |
 
 Older records can name artifacts that were later pruned.

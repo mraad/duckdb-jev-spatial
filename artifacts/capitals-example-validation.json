@@ -1,6 +1,6 @@
 {
  "checked_at": "2026-11-18",
- "sql_sha256": "5724b281efb78d19d53d0c6e2e4a5459917bfa8d77eae41ed58a800e8afb85b7",
+ "sql_sha256": "3875453f5a2c5064424117ea3d628ac0f6996595049fc7e88c02b2c17b90e85b",
  "extension_sha256": "fc1831d2e5336a700877bc06f8bba99b407fb102ee6cff80cb0035352cbf1ed4",
  "model_weights_sha256": "afcc11e72b59193fbec6e5dc8b693c9baa81cf66bec53279cefd687b318c3199",
  "duckdb": "2.0.0",
@@ -424,7 +424,7 @@
  },
  "not_run": "pytest/cargo are recorded in artifacts/duckdb2-validation.json",
  "examples_equal_to_duckdb_1_5_6_record": true,
- "shell_output": "artifacts/duckdb2/capitals-shell.json",
+ "shell_output": "artifacts/duckdb2/capitals-shell.txt",
  "larger_models": {
   "prompt": "City: {city}\nCountry: {country}\nIs this city the capital of its country? Answer with exactly one word: yes or no.",
   "results": {

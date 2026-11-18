@@ -28,16 +28,16 @@ def baseline_rows(con):
     # Different relational plan and distance predicate; do not call the compiler here.
     return con.execute('''
         WITH w AS MATERIALIZED (
-            SELECT OBJECTID, water_depth,
+            SELECT OBJECTID,
                 ST_Transform(geometry, 'EPSG:4326', 'EPSG:3035', always_xy:=true) g
-            FROM Wells WHERE geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
+            FROM Wells WHERE water_depth > 350 AND geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
         ), p AS MATERIALIZED (
             SELECT ST_Transform(geometry, 'EPSG:4326', 'EPSG:3035', always_xy:=true) g
             FROM Pipelines WHERE current_phase='IN SERVICE'
                 AND geometry IS NOT NULL AND NOT ST_IsEmpty(geometry)
         )
         SELECT w.OBJECTID, min(ST_Distance(w.g,p.g)) nearest_m
-        FROM w CROSS JOIN p WHERE w.water_depth > 350
+        FROM w CROSS JOIN p
         GROUP BY w.OBJECTID HAVING nearest_m <= 5000 ORDER BY w.OBJECTID
     ''').fetchall()
 

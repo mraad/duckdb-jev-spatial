@@ -18,7 +18,7 @@
   "native/src/lib.rs: no change"
  ],
  "pytest": {
-  "passed": 95,
+  "passed": 97,
   "skipped": 0,
   "log": "artifacts/duckdb2/pytest.txt"
  },
@@ -64,13 +64,15 @@
   ],
   "exact_counts_equal_to_1_5_6": true,
   "northsea_sql": "ran, exit 0; output not compared",
-  "capitals": "ran, exit 0",
+  "capitals": "ran with SET geometry_always_xy = true, exit 0, empty stderr; top-city result equal to the Python-client record",
   "records": [
-   "artifacts/duckdb2/capitals-shell.json",
-   "artifacts/duckdb2/northsea-shell.json",
-   "artifacts/duckdb2/spatial-examples-shell.json",
-   "artifacts/duckdb2/spatial-jev-shell.json"
-  ]
+   "artifacts/duckdb2/capitals-shell.txt",
+   "artifacts/duckdb2/northsea-shell.txt",
+   "artifacts/duckdb2/spatial-examples-shell.txt",
+   "artifacts/duckdb2/spatial-jev-shell.txt"
+  ],
+  "stderr": "artifacts/duckdb2/shell-stderr.txt (each run labeled, with its exit status; no errors)",
+  "format": "Raw shell output: one JSON array for each statement, not one JSON document"
  },
  "tev1": {
   "requests": 256,
@@ -114,5 +116,6 @@
   "note": "About 36% slower on cache hits; repeated once with the same result; cause not examined",
   "record": "artifacts/duckdb2/benchmark.json"
  },
- "docs_image": "docs/images/architecture.png redrawn with rsvg-convert to say DuckDB 2.0.0"
+ "docs_image": "docs/images/architecture.png redrawn with rsvg-convert to say DuckDB 2.0.0",
+ "review_fixes": "CodeRabbit PR review: baseline query filters depth before the transform (IDs unchanged), Catalog rejects non-mapping YAML, capitals ranking returns one city for each country on ties, trial script guards"
 }

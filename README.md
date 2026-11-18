@@ -40,7 +40,7 @@ The documentation uses each term with one meaning only.
 
 ## Requirements
 
-The tested build is for DuckDB 2.0.0 on macOS arm64.
+The project requires DuckDB 2.0.0. [Validation](docs/validation.md#current-results) gives the tested version and platform.
 The native extension is an unsigned development build.
 Source control excludes the native extension and the model files.
 
@@ -56,7 +56,6 @@ Setup requires these items:
 - `uv` and Python 3.12.
 - The Laya checkout at `../laya`.
 
-The native extension is tested with DuckDB 2.0.0 only.
 The build script accepts only the DuckDB 2.0.0 Python package.
 Other platforms, GPU providers, and signed distribution are not tested.
 
@@ -110,6 +109,7 @@ Apply that patch only to a fresh checkout at the documented base commit.
    ```
 
    The DuckDB shell and the Python `duckdb` package use the same installed extension.
+   Use the DuckDB 2.0.0 shell for this step. A spatial extension that an earlier DuckDB version installed does not load in DuckDB 2.0.0.
 
 3. Fetch the locked Rust dependencies.
 
@@ -636,7 +636,7 @@ ORDER BY country, city;
 The file also shows the probability for each city.
 It also combines the filter with a 1,500 km distance limit from Paris.
 The file sets `geometry_always_xy = true`. DuckDB 2.0 requires this setting for `ST_Distance_Sphere`.
-The last query keeps the city with the highest probability in each country. It uses no threshold.
+The last query keeps one city in each country: the city with the highest probability. It uses no threshold.
 The model makes errors on this table. [Capital answers](docs/validation.md#capital-answers) lists them.
 Do not use this filter where a wrong answer has a cost.
 

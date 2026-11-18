@@ -1,6 +1,7 @@
 {
  "question": "Is this city the capital of its country?",
  "prompt": "City: {city}\nCountry: {country}\nIs this city the capital of its country? Answer with exactly one word: yes or no.",
+ "cities_sha256": "e4710af3cc3205b20464d38827fd047439128ef45ffb96a064386ba4599a1421",
  "models": {
   "Qwen3-8B Q4_K_M (llama-server, local)": {
    "example_cities": {
