@@ -3,6 +3,8 @@ from dataclasses import asdict, replace
 import json
 from pathlib import Path
 
+import yaml
+
 from .catalog import Catalog
 from .engine import NativeRuntime, connect, execute, load_agent, register_jev
 from .planner import compile_query, parse_question
@@ -24,7 +26,10 @@ def main():
     if args.extension and (args.device != 'cpu' or args.max_evaluations != 1000):
         parser.error('The native backend uses CPU and a fixed 1000-evaluation budget')
     try:
-        catalog = Catalog(args.project or args.database.parent)
+        try:
+            catalog = Catalog(args.project or args.database.parent)
+        except (KeyError, yaml.YAMLError) as exc:
+            parser.error(f"Invalid metadata: {exc}")
         query = replace(parse_question(args.question, catalog), semantic=args.semantic, semantic_fields=tuple(args.fields))
         compiled = compile_query(query, catalog)
         output = {"plan": asdict(query), "where": compiled.where, "sql": compiled.sql,

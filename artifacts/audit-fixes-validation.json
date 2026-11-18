@@ -1,0 +1,34 @@
+{
+ "checked_at": "2026-11-18",
+ "change": "audit fixes: option rule aligned with native, dead abstain branch removed, shared baseline query, readable CLI metadata errors",
+ "pytest": {
+  "passed": 95,
+  "skipped": 0,
+  "log": "artifacts/audit-fixes-pytest.txt"
+ },
+ "northsea_smoke": {
+  "result_count": 106,
+  "exact_ids_match": true,
+  "record": "artifacts/audit-fixes-smoke.json"
+ },
+ "tev1": {
+  "requests": 256,
+  "valid": 256,
+  "correct": 250,
+  "records_sha256": "488ac5dad8f722324a376dbafc004782a8256ba555e36ba397fd2b02ad790c7e",
+  "sql_full_id_set_matches_baseline": true,
+  "sql_full_result_count": 106,
+  "laya_unique_evaluations": 25,
+  "database_unchanged": true,
+  "records_sha256_equal_to_tev1_cleanup": true,
+  "record": "artifacts/audit-fixes-tev1/report.json"
+ },
+ "source_sha256": {
+  "jev_spatial/jev.py": "1408566b5ad12d908cde82bb99f0c0b0e807625a979cd33bd5d4a7ead5ef114b",
+  "jev_spatial/cli.py": "04a3e7ed777b933acd38bec3a6ba41c3e2ba5d1f670c7ed8ddbcc269ca6b4bee",
+  "scripts/smoke_northsea.py": "eaa8f51f908736c3c55e7c4857852cb6d36e78a5d6a56e441574da8bc2c7b889",
+  "scripts/evaluate_tev1.py": "96abf030aa4834aed5b31ea6db541bef8163228648a848a24f5be89a63ccf7f3"
+ },
+ "database_sha256": "37262552dc78051fcceb074e8b02f23de8783fd084f8cd3d7862a43f241b596f",
+ "not_run": "cargo test, clippy, rustfmt (no Rust change; local Cargo cache lacks ahash v0.8.12, run cargo fetch --locked first); Python backend with the PyTorch checkpoint"
+}
